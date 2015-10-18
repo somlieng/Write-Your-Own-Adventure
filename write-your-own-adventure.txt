@@ -1,0 +1,58 @@
+*********************************************************************
+CSC 210 Final Project Proposal
+Title: Write-Your-Own-Adventure Game
+Team Members: Som Euakarn Liengtiraphan, Jeff Hrebenach, Evan Lea
+*********************************************************************
+Project Description:
+
+The idea for this project is based off Reddit and the Fan fiction 
+culture of reimagination and collaboration. We plan to build a 
+write-your-own-adventure portal where participants choose from various 
+starting prompts and write their own short stories. After the stories 
+are built, these stories will be hosted on the website for all other 
+users to see and accompanied with an upvoting system that users can 
+use to vote for their favorite recreations. After a certain limit, 
+those new short stories will be become new starting prompts. 
+
+Requirement Fulfillment:
+
+Create: Users will need to create an account to be able to post 
+their stories on the website. Through their account, they would 
+also be able to view all the stories they have written and other 
+statistics.
+
+Read: Users will be able to read all of the stories, which is 
+stored in a database on the server, through the website
+
+Update: Users will be able to create more stories and update 
+their user account data on the website
+
+Delete: Users will be able to delete their stories and 
+their account on this website
+
+Of course, all of the above will be run through Ajax. 
+
+If we have time, it would also be a good feature to create an 
+online web chat service through WebSockets to enable more 
+collaboration between the many users. 
+
+Github Repository:
+
+Target Audience:
+
+This website is targeted to people who loves to write and share 
+their writing. There is no specific age target, because you can 
+love to write whether you are 7 or your are 77. An idea we also had 
+was to section off certain parts of the site for different ages, to 
+prevent inappropriate material and language. 
+
+This project is a solution to:
+
+This website would provide a platform for emerging writers to 
+hone their skills. 
+
+Uniqueness of Project:
+
+
+
+
