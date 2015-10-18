@@ -38,6 +38,9 @@ collaboration between the many users.
 
 Github Repository:
 
+Github Clone URL: https://github.com/somlieng/Write-Your-Own-Adventure.git
+Github Repository URL: https://github.com/somlieng/Write-Your-Own-Adventure
+
 Target Audience:
 
 This website is targeted to people who loves to write and share 
@@ -48,10 +51,20 @@ prevent inappropriate material and language.
 
 This project is a solution to:
 
-This website would provide a platform for emerging writers to 
-hone their skills. 
+This website would provide a platform for emerging writers to hone 
+their skills. It will also help writers to overcome writer's block 
+by allowing them to expand on existing storylines and challenge 
+them by making them write about topic they might be less comfortable 
+with.
 
 Uniqueness of Project:
+
+This project would expand on the minimum requirements by 
+implementing a specialized comment section and a basic voting 
+system. The website will aim to provide a space on the web where 
+creative writers can share and learn, which so far is not 
+extensively present.
+
 
 
 
