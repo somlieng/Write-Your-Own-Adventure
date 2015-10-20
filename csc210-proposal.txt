@@ -1,18 +1,27 @@
 *********************************************************************
 CSC 210 Final Project Proposal
-Title: Write-Your-Own-Adventure Game
+Title: Story Tree
 Team Members: Som Euakarn Liengtiraphan, Jeff Hrebenach, Evan Lea
 *********************************************************************
 Project Description:
 
-The idea for this project is based off Reddit and the Fan fiction 
+The idea for this project is based off Reddit and the Writing Prompt
 culture of reimagination and collaboration. We plan to build a 
-write-your-own-adventure portal where participants choose from various 
-starting prompts and write their own short stories. After the stories 
-are built, these stories will be hosted on the website for all other 
+write-your-own-adventure portal where participants can write
+prompts to start a collaborative work of fiction. After the initial prompt 
+is built, any user will be able to build upon previous story branches
+to expand existing stories, and this process will be able to recurse
+indefinitely. We expect that really cool and imaginative stories will
+be born from this process. This structure can be thought of as a tree,
+with each parent node having an unbounded number of children. 
+Using a voting system, certain story paths will be at the 
+forefront of a particular story 'root', and will be more
+visible (and likely will have more collaboration on top of them).
+
+These stories will be hosted on the website for all other 
 users to see and accompanied with an upvoting system that users can 
 use to vote for their favorite recreations. After a certain limit, 
-those new short stories will be become new starting prompts. 
+those new short stories will be become new starting prompts.
 
 Requirement Fulfillment:
 
@@ -22,19 +31,19 @@ also be able to view all the stories they have written and other
 statistics.
 
 Read: Users will be able to read all of the stories, which is 
-stored in a database on the server, through the website
+stored in a database on the server, through the website.
 
 Update: Users will be able to create more stories and update 
-their user account data on the website
+their user account data on the website.
 
 Delete: Users will be able to delete their stories and 
-their account on this website
+their account on this website.
 
 Of course, all of the above will be run through Ajax. 
 
 If we have time, it would also be a good feature to create an 
 online web chat service through WebSockets to enable more 
-collaboration between the many users. 
+collaboration between the many users.
 
 Github Repository:
 
@@ -43,11 +52,11 @@ Github Repository URL: https://github.com/somlieng/Write-Your-Own-Adventure
 
 Target Audience:
 
-This website is targeted to people who loves to write and share 
-their writing. There is no specific age target, because you can 
-love to write whether you are 7 or your are 77. An idea we also had 
-was to section off certain parts of the site for different ages, to 
-prevent inappropriate material and language. 
+This website is targeted both towards people who love to write and share 
+their writing, and to those who enjoy reading fiction. There is no specific
+age target, because you can love to write whether you are 7 or your are 77. 
+An idea we also had was to section off certain parts of the site for different
+ages, to prevent inappropriate material and language (similar to Reddit's NSFW). 
 
 This project is a solution to:
 
@@ -55,15 +64,18 @@ This website would provide a platform for emerging writers to hone
 their skills. It will also help writers to overcome writer's block 
 by allowing them to expand on existing storylines and challenge 
 them by making them write about topic they might be less comfortable 
-with.
+with. Secondly, it could possibly be a gateway for creative fiction writers
+to be discovered. Under this same logic, it could also be a gateway for
+publishers to discover new authors. 
 
-Uniqueness of Project:
+Uniqueness and Creativity of Project:
 
 This project would expand on the minimum requirements by 
 implementing a specialized comment section and a basic voting 
 system. The website will aim to provide a space on the web where 
 creative writers can share and learn, which so far is not 
-extensively present.
+extensively present. Also, the tree structure of the stories
+will be above minimum requirements.
 
 
 
