@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // sub-directory, and the server will serve them from there. e.g.,:
 
 // will send the file static_files/cat.jpg to the user's Web browser
-
+app.set('view engine', 'html');
 app.use(express.static('static_files'));
 
 
@@ -88,6 +88,12 @@ app.post('/users', function (req, res) {
 
     }
   });
+});
+
+app.get('/', function (req, res) {
+  res.render('index', {});
+});
+
 
 
 
