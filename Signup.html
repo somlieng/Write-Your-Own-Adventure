@@ -20,6 +20,38 @@
 
 		<link href="signup.css" rel="stylesheet">
 
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script type="text/javascript">
+	$(document).ready(function() {
+	  // define a generic Ajax error handler:
+	  // http://api.jquery.com/ajaxerror/
+	  $(document).ajaxError(function() {
+	    alert("Sorry, there was a problem!");
+	  });
+
+	  $("#createButton").click(function() {
+	    $.ajax({
+	      // The URL for the request -- note the simple REST API!
+	      // all URLs are relative to http://localhost:3000/
+	      url: "users/",
+	      type: "POST",
+	      dataType : "text", // this URL returns a plain text string, not JSON
+	      data : { password: $("#inputPassword").val(),
+	               email: $("#inputEmail").val(),
+	               name: $("#inputName").val()
+	             },
+	      success: function( data ) {
+	        console.log("You received some data!", data);
+	        if (data == 'OK') {
+	          $("#status").html("Successfully created a new user!");
+	        } else {
+	          $("#status").html("Error: could not create a new user!");
+	        }
+	      },
+	    });
+	  });
+	 </script>
 
 	</head>
 
@@ -48,7 +80,7 @@
 		        <label for="inputName" class="sr-only">enter your name</label>
 		        <input type="text" id="inputName" class="form-control" placeholder="Name" required>
 		        <br>
-		       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		       <button class="btn btn-lg btn-primary btn-block" type="submit" id="createButton">Create New Account</button>
 		      </form>
 		    </div>
 		</div>

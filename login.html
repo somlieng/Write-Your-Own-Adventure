@@ -20,7 +20,7 @@
 
 		<link href="login.css" rel="stylesheet">
 
-		 <!--Import jQuery before materialize.js-->
+		 
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
     <script type="text/javascript">
@@ -33,20 +33,23 @@
 
 	  $("#signinButton").click(function() {
 	    $.ajax({
-	      // The URL for the request -- note the simple REST API!
-	      // all URLs are relative to http://localhost:3000/
-	      url: "users/",
-	      type: "POST",
-	      dataType : "text", // this URL returns a plain text string, not JSON
-	      data : { name: $("#inputPassword").val(),
-	               job: $("#inputEmail").val(),
-	             },
-	      success: function( data ) {
-	        console.log("You received some data!", data);
-	        if (data == 'OK') {
-	          $("#status").html("Successfully created a new user!");
-	        } else {
-	          $("#status").html("Error: could not create a new user!");
+      // The URL for the request -- note the simple REST API!
+      // all URLs are relative to http://localhost:3000/
+      url: "users/" + $("#nameBox").val(),
+      type: "GET",
+      dataType : "json", // this URL returns data in JSON format
+      success: function( data ) {
+        console.log("You received some data!", data);
+        if (data.name) {
+          $("#nameDiv").html("My name is " + data.name);
+          $("#ageDiv").html("My job is " + data.job);
+          $("#profileImage").attr("src", data.pet);
+        } else {
+          $("#status").html("Error: could not find user!");
+          // clear the profile display
+          $("#nameDiv").html("");
+          $("#ageDiv").html("");
+          $("#profileImage").attr("src", "");
 	        }
 	      },
 	    });
