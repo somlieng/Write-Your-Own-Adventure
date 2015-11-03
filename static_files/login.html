@@ -41,15 +41,15 @@
       success: function( data ) {
         console.log("You received some data!", data);
         if (data.name) {
-          $("#nameDiv").html("My name is " + data.name);
-          $("#ageDiv").html("My job is " + data.job);
-          $("#profileImage").attr("src", data.pet);
+          $("#inputEmail").html("My name is " + data.name);
+          $("#inputPassword").html("My job is " + data.password);
+          //$("#profileImage").attr("src", data.pet);
         } else {
           $("#status").html("Error: could not find user!");
           // clear the profile display
           $("#nameDiv").html("");
           $("#ageDiv").html("");
-          $("#profileImage").attr("src", "");
+          //$("#profileImage").attr("src", "");
 	        }
 	      },
 	    });
