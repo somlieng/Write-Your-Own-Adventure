@@ -32,9 +32,10 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // sub-directory, and the server will serve them from there. e.g.,:
 
 // will send the file static_files/cat.jpg to the user's Web browser
-app.set('view engine', 'html');
+// app.set('view engine', 'jade');
 app.use(express.static('static_files'));
 
+mongodb.use
 
 
 
@@ -90,11 +91,35 @@ app.post('/users', function (req, res) {
   });
 });
 
-app.get('/', function (req, res) {
-  res.render('index', {});
+app.get('/users/*', function (req, res) {
+  var nameToLookup = req.params[0]; // this matches the '*' part of '/users/*' above
+  // try to look up in fakeDatabase
+  for (var i = 0; i < fakeDatabase.length; i++) {
+    var e = fakeDatabase[i];
+    if (e.name == nameToLookup) {
+      res.send(e);
+      return; // return early!
+    }
+  }
+
+  res.send('{}'); // failed, so return an empty JSON object!
 });
 
 
+// READ a list of all usernames (note that there's no '*' at the end)
+//
+// To test with curl, run:
+//   curl -X GET http://localhost:3000/users
+app.get('/users', function (req, res) {
+  var allUsernames = [];
+
+  for (var i = 0; i < fakeDatabase.length; i++) {
+    var e = fakeDatabase[i];
+    allUsernames.push(e.name); // just record names
+  }
+
+  res.send(allUsernames);
+});
 
 
 // start the server on http://localhost:3000/
