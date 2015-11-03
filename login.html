@@ -1,0 +1,89 @@
+<html lang="en">
+	
+	<head>
+
+		<meta charset="utf-8">
+   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- Enable Mobile view with viewport meta tag -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Title for the page -->
+		<title>Login to Story Tree</title>
+
+		<!-- Bootstrap Framework Dependencies -->
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+		<link href="login.css" rel="stylesheet">
+
+		 
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script type="text/javascript">
+	$(document).ready(function() {
+	  // define a generic Ajax error handler:
+	  // http://api.jquery.com/ajaxerror/
+	  $(document).ajaxError(function() {
+	    alert("Sorry, there was a problem!");
+	  });
+
+	  $("#signinButton").click(function() {
+	    $.ajax({
+      // The URL for the request -- note the simple REST API!
+      // all URLs are relative to http://localhost:3000/
+      url: "users/" + $("#nameBox").val(),
+      type: "GET",
+      dataType : "json", // this URL returns data in JSON format
+      success: function( data ) {
+        console.log("You received some data!", data);
+        if (data.name) {
+          $("#inputEmail").html("My name is " + data.name);
+          $("#inputPassword").html("My job is " + data.password);
+          //$("#profileImage").attr("src", data.pet);
+        } else {
+          $("#status").html("Error: could not find user!");
+          // clear the profile display
+          $("#nameDiv").html("");
+          $("#ageDiv").html("");
+          //$("#profileImage").attr("src", "");
+	        }
+	      },
+	    });
+	  });
+	 </script>
+
+	</head>
+
+	<body background="trees.jpg">
+	
+	<div class="container">
+
+		<div class="row vertical-center-row">
+        <div class="text-center col-md-4 col-md-offset-4">
+
+		<!-- Adapted from sign in template form Bootstrap's example page -->
+
+		<div class="panel panel-default" id="signin-panel">
+  			<div class="panel-body" id="panel-bg">
+		      <form class="form-signin">
+		        <h2 class="form-signin-heading">Please sign in</h2>
+		        <label for="inputEmail" class="sr-only">Email address</label>
+		        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+		        <label for="inputPassword" class="sr-only">Password</label>
+		        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+		        <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinButton">Sign in</button>
+		      </form>
+		    </div>
+		</div>
+
+		</div>
+		</div>
+
+	    </div> <!-- /container -->
+	
+	</body>
+</html>
