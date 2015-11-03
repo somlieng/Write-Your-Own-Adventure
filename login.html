@@ -20,6 +20,38 @@
 
 		<link href="login.css" rel="stylesheet">
 
+		 <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script type="text/javascript">
+	$(document).ready(function() {
+	  // define a generic Ajax error handler:
+	  // http://api.jquery.com/ajaxerror/
+	  $(document).ajaxError(function() {
+	    alert("Sorry, there was a problem!");
+	  });
+
+	  $("#signinButton").click(function() {
+	    $.ajax({
+	      // The URL for the request -- note the simple REST API!
+	      // all URLs are relative to http://localhost:3000/
+	      url: "users/",
+	      type: "POST",
+	      dataType : "text", // this URL returns a plain text string, not JSON
+	      data : { name: $("#inputPassword").val(),
+	               job: $("#inputEmail").val(),
+	             },
+	      success: function( data ) {
+	        console.log("You received some data!", data);
+	        if (data == 'OK') {
+	          $("#status").html("Successfully created a new user!");
+	        } else {
+	          $("#status").html("Error: could not create a new user!");
+	        }
+	      },
+	    });
+	  });
+	 </script>
 
 	</head>
 
@@ -40,7 +72,7 @@
 		        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 		        <label for="inputPassword" class="sr-only">Password</label>
 		        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-		        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		        <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinButton">Sign in</button>
 		      </form>
 		    </div>
 		</div>
