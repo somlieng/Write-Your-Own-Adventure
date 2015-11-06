@@ -11,6 +11,10 @@ router.get('/helloworld', function(req, res) {
     res.render('helloworld', { title: 'Hello, World!' });
 });
 
+router.get('/login', function(req, res) {
+    res.render('login', { title: 'Login' });
+});
+
 /* GET Userlist page. */
 router.get('/userlist', function(req, res) {
     var db = req.db;
@@ -36,6 +40,7 @@ router.post('/adduser', function(req, res) {
     // Get our form values. These rely on the "name" attributes
     var userName = req.body.username;
     var userEmail = req.body.useremail;
+    var userPassword = req.body.userpassword;
 
     // Set our collection
     var collection = db.get('usercollection');
@@ -43,7 +48,8 @@ router.post('/adduser', function(req, res) {
     // Submit to the DB
     collection.insert({
         "username" : userName,
-        "email" : userEmail
+        "email" : userEmail,
+        "password" : userPassword
     }, function (err, doc) {
         if (err) {
             // If it failed, return error

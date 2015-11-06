@@ -5,31 +5,26 @@ html(lang='en')
     // Enable Mobile view with viewport meta tag
     meta(name='viewport', content='width=device-width, initial-scale=1')
     // Title for the page
-    title Create an Account for Story Tree
+    title Login to Story Tree
     // Bootstrap Framework Dependencies
     // Latest compiled and minified CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', integrity='sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==', crossorigin='anonymous')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js', integrity='sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==', crossorigin='anonymous')
-    link(href='/stylesheets/signup.css', rel='stylesheet')
+    link(href='/stylesheets/login.css', rel='stylesheet')
     script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
   body(background='trees.jpg')
     .container
       .row.vertical-center-row
         .text-center.col-md-4.col-md-offset-4
           // Adapted from sign in template form Bootstrap's example page
-          #signup-panel.panel.panel-default
+          #signin-panel.panel.panel-default
             #panel-bg.panel-body
               form.form-signin(name='adduser', method='post', action='/adduser')
-                h2.form-signin-heading Sign Up Here
-                label.sr-only(for='inputEmail') enter your email address
-                input#inputEmail.form-control(type='email', placeholder='Email address', required='', autofocus='', name='useremail')
-                br
-                label.sr-only(for='inputPassword') enter your password
-                input#inputPassword.form-control(type='password', placeholder='Password', required='', name='userpassword')
-                br
-                label.sr-only(for='inputName') enter your name
-                input#inputName.form-control(type='text', placeholder='Name', required='', name='username')
-                br
-                button#createButton.btn.btn-lg.btn-primary.btn-block(type='submit') Create New Account
+                h2.form-signin-heading Please sign in
+                label.sr-only(for='username') Username
+                input#username.form-control(type='text', placeholder='Username', required='', autofocus='', name='username')
+                label.sr-only(for='useremail') Email
+                input#useremail.form-control(type='email', placeholder='Email', required='', name='useremail')
+                button#signinButton.btn.btn-lg.btn-primary.btn-block(type='submit') Sign in
     // /container
