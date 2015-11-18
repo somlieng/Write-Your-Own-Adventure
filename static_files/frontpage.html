@@ -1,0 +1,143 @@
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- Enable Mobile view with viewport meta tag -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Title for the page -->
+		<title>StoryTree Frontpage</title>
+
+		<!-- Bootstrap Framework Dependencies -->
+		
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+			<script type="text/javascript">
+
+			<!-- Load Content -->
+			var img = $("<img />").attr('src', 'misty.jpg')
+			    
+			    $.onload('load', function() {
+			        if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+			            alert('broken image!');
+			        } else {
+			            $("#something").append(img);
+			        }
+			    });
+
+			$("#title1").load("Randomenon");
+			$("#blurp1").load("Some Random Story");
+
+
+				$("#image1").click(function() {
+			    $.ajax({
+			      url: "stories/" + $("#image1").val(),
+			      type: "GET",
+			      dataType : "json", // this URL returns data in JSON format
+
+			      success: function( data ) {
+			        console.log("You received some data!", data);
+
+			        if (data.name) {
+			          $("#nameDiv").html("My name is " + data.name);
+			          $("#ageDiv").html("My job is " + data.job);
+			          $("#profileImage").attr("src", data.pet);
+			        } else {
+			          $("#status").html("Error: could not find user!");
+			        }
+			      },
+					});
+				});
+			</script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+    
+
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Contact</a></li>
+            <li role="presentation" class="dropdown">
+		    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+		      Dropdown <span class="caret"></span>
+		    </a>
+		    <ul class="dropdown-menu">
+		      	<li><a href="#">HTML</a></li>
+			    <li><a href="#">CSS</a></li>
+			    <li><a href="#">JavaScript</a></li>
+		    </ul>
+		  </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Project name</h3>
+
+      </div>
+
+      <div class="jumbotron">
+        <h1>Jumbotron heading</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+      </div>
+
+      <div class="latest"><center><h3>Latest Posts</h3></center></div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+
+        <img id="image1" style="width: 500px; text-align:center"/>
+         <div id="title1">Title1</div>
+         <div id="blurp1"></div>
+
+          <img id="image2" style="width: 500px; text-align:center" />
+          <div id="title2">Title 2</div>
+           <div id="blurp2"></div>
+          
+           <img id="image3" style="width: 500px; text-align:center" />
+          <div id="title3">Title 3</div>
+           <div id="blurp3"></div>
+          
+
+        <img id="image4" style="width: 500px; text-align:center" />
+          <div id="title4">Title 4</div>
+           <div id="blurp4"></div>
+
+          <img id="image5" style="width: 500px; text-align:center" />
+          <div id="title5">Title 5</div>
+           <div id="blurp5"></div>
+
+         <img id="image6" style="width: 500px; text-align:center" />
+          <div id="title6">Title 6</div>
+           <div id="blurp6"></div>        
+
+           </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2015 Company, Inc.</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+</body>
+</html>
+	
+	
