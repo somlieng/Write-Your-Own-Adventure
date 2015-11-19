@@ -2,9 +2,7 @@
 
 //   first...
 //   npm install express
-//   npm install body-parser
-//   npm install mongodb
-//   npm install mongoose
+//   npm install sqlite3
 
 
 // then run:
@@ -13,14 +11,13 @@
 
 var express = require('express');
 var app = express();
-var mongodb = require('mongodb');
 
-//create mongoclient to connect db with server
-var MongoClient = mongodb.MongoClient;
+var fs = require("fs");
+var file = "storytree.db";
+var exists = fs.existsSync(file);
 
-var userdb = 'mongodb://localhost:3000/userbase.db';
-
-
+var sqlite3 = require("sqlite3").verbose();
+var db = new sqlite3.Database(file);
 
 
 // required to support parsing of POST request bodies
@@ -32,10 +29,39 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 // sub-directory, and the server will serve them from there. e.g.,:
 
 // will send the file static_files/cat.jpg to the user's Web browser
-// app.set('view engine', 'jade');
+app.set('view engine', 'jade');
 app.use(express.static('static_files'));
 
-mongodb.use
+
+// public void addUser(User u) {
+//     mDB.insert(
+//             Users,
+//             null,
+//             getUserContentValues(u)
+//     );
+// }
+ 
+db.serialize(function() {
+  if (!exists) {
+    db.run("create table Users"
+                + "(email TEXT, "
+                + "password TEXT, "
+                + "username TEXT, "
+                + "firstname TEXT, "
+                + "lastname TEXT)");
+  }
+});
+ 
+var stmt = db.prepare("INSERT INTO users VALUES (?)");
+for (var i = 0; i < 10; i++) {
+    stmt.run("Ipsum " + i);
+}
+stmt.finalize();
+
+db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
+    console.log(row.id + ": " + row.info);
+});
+
 
 
 
@@ -43,53 +69,43 @@ mongodb.use
 //
 // To test with curl, run:
 //   curl -X POST --data "name=Carol&job=scientist&pet=dog.jpg" http://localhost:3000/users
-app.post('/users', function (req, res) {
-  var postBody = req.body;
-  var myName = postBody.name;
+app.post('/Signup', function (req, res) {
+  var user = req.body;
+
+  var email = user.inputEmail;
+  var password = user.inputPassword;
+  var username = user.inputuserName;
+  var firstname = user.inputfirstName;
+  var lastname = user.inputlastName;
+
+  var alreadyFound = false;
+
+
 
   // must have a name!
-  if (!myName) {
-    res.send('ERROR');
+  if (!email || !password || !username || !firstname || !lastname) {
+    res.send('ERROR, not all required information entered');
     return; // return early!
   }
 
-  // check if user's name is already in database; if so, send an error
- 
-  MongoClient.connect(userdb, function (err, db) {
-    if (err) {
-      console.log('Cant connect to mongoDB', err);
-      return;
-    }
-    else {
-
-      console.log('Connected to mongoDB');
-
-      var users = db.collection('users');
-
-      for (var i = 0; i < users.length; i++) {
-        var e = users[i];
-        if (e.name == myName) {
-          res.send('ERROR');
-          return; // return early!
-        }
+  else {
+    db.all("SELECT * from users WHERE email="+email, function(err,rows) {
+      if (rows.length > 0) {
+        alreadyFound = true;
       }
-      collection.insert(postBody, function (err, result) {
-        if (err) {
-          console.log(err);
-        }
-        else {
-          console.log('inserted into users collection"');
-        }
-        
-      });
+    });
+  }
+  if (!alreadyFound) {
+    var stmt = db.prepare("INSERT into users VALUES(?,?,?,?,?)");
+    stmt.run(email, password, username, firstname, lastname);
+    stmt.finalize();
+    
+  }
 
-      res.send('OK');
-
-      db.close();
-
-    }
-  });
 });
+
+
+  // check if user's name is already in database; if so, send an error
 
 app.get('/users/*', function (req, res) {
   var nameToLookup = req.params[0]; // this matches the '*' part of '/users/*' above
@@ -106,17 +122,8 @@ app.get('/users/*', function (req, res) {
 });
 
 
-// READ a list of all usernames (note that there's no '*' at the end)
-//
-// To test with curl, run:
-//   curl -X GET http://localhost:3000/users
 app.get('/users', function (req, res) {
   var allUsernames = [];
-
-  for (var i = 0; i < fakeDatabase.length; i++) {
-    var e = fakeDatabase[i];
-    allUsernames.push(e.name); // just record names
-  }
 
   res.send(allUsernames);
 });
