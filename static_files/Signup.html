@@ -39,7 +39,9 @@
 	      dataType : "text", // this URL returns a plain text string, not JSON
 	      data : { password: $("#inputPassword").val(),
 	               email: $("#inputEmail").val(),
-	               name: $("#inputName").val()
+	               username: $("#inputuserName").val(),
+	               firstname: $("#inputfirstName").val(),
+	               lastname: $("#inputlastName").val()
 	             },
 	      success: function( data ) {
 	        console.log("You received some data!", data);
@@ -77,9 +79,20 @@
 		        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
 		        <br>
-		        <label for="inputName" class="sr-only">enter your name</label>
-		        <input type="text" id="inputName" class="form-control" placeholder="Name" required>
+		        <label for="inputuserName" class="sr-only">enter your username</label>
+		        <input type="text" id="inputuserName" class="form-control" placeholder="userName" required>
 		        <br>
+
+		        <br>
+		        <label for="inputfirstName" class="sr-only">enter your first name</label>
+		        <input type="text" id="inputfirstName" class="form-control" placeholder="firstName" required>
+		        <br>
+
+		        <br>
+		        <label for="inputlastName" class="sr-only">enter your last name</label>
+		        <input type="text" id="inputlastName" class="form-control" placeholder="lastName" required>
+		        <br>
+
 		       <button class="btn btn-lg btn-primary btn-block" type="submit" id="createButton">Create New Account</button>
 		      </form>
 		    </div>
