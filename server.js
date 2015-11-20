@@ -43,23 +43,13 @@ app.use(express.static('static_files'));
  
 db.serialize(function() {
   if (!exists) {
-    db.run("create table Users"
+    db.run("create table users"
                 + "(email TEXT, "
                 + "password TEXT, "
                 + "username TEXT, "
                 + "firstname TEXT, "
                 + "lastname TEXT)");
   }
-});
- 
-var stmt = db.prepare("INSERT INTO users VALUES (?)");
-for (var i = 0; i < 10; i++) {
-    stmt.run("Ipsum " + i);
-}
-stmt.finalize();
-
-db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {
-    console.log(row.id + ": " + row.info);
 });
 
 
