@@ -31,29 +31,28 @@
 	    alert("Sorry, there was a problem!");
 	  });
 
-	  $("#signinButton").click(function() {
+	    $("#signinButton").click(function() {
 	    $.ajax({
-      // The URL for the request -- note the simple REST API!
-      // all URLs are relative to http://localhost:3000/
-      url: "users/" + $("#nameBox").val(),
-      type: "GET",
-      dataType : "json", // this URL returns data in JSON format
-      success: function( data ) {
-        console.log("You received some data!", data);
-        if (data.name) {
-          $("#inputEmail").html("My name is " + data.name);
-          $("#inputPassword").html("My job is " + data.password);
-          //$("#profileImage").attr("src", data.pet);
-        } else {
-          $("#status").html("Error: could not find user!");
-          // clear the profile display
-          $("#nameDiv").html("");
-          $("#ageDiv").html("");
-          //$("#profileImage").attr("src", "");
+	      // The URL for the request -- note the simple REST API!
+	      // all URLs are relative to http://localhost:3000/
+	      url: "/login",
+	      type: "POST",
+	      dataType : "text", // this URL returns a plain text string, not JSON
+	      data : { password: $("#inputPassword").val(),
+	               email: $("#inputEmail").val()
+	             },
+	      success: function( data ) {
+	        console.log("You received some data!", data);
+	        if (data == 'OK') {
+	          $("#status").html("Successfully created a new user!");
+	        } else {
+	          $("#status").html("Error: could not create a new user!");
 	        }
 	      },
 	    });
 	  });
+	});
+
 	 </script>
 
 	</head>
