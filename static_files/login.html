@@ -45,7 +45,8 @@
 	        console.log("You received some data!", data);
 	         if (data == 'OK') {
 	          window.location.href = "frontpage.html";
-	          localStorage.setItem("email","#inputEmail");
+	          var storeEmail = document.getElementById("inputEmail");
+	          localStorage.setItem("email",storeEmail.value);
 	        }  else {
 	          $("#status").html("Error: could not create a new user!");
 	        }

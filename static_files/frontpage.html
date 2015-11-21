@@ -27,10 +27,8 @@
 			var img = $("<img />").attr('src', 'misty.jpg')
 			    
 			    $.onload('load', function() {
-			        if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
-			            alert('broken image!');
-			        } else {
-			            $("#something").append(img);
+			        if(localStorage.getItem("email")="null" || localStorage.getItem("email"="undefined")){
+			        	window.location.href = "login.html";
 			        }
 			    });
 
@@ -39,6 +37,7 @@
 
 
 				$("#image1").click(function() {
+			   
 			    $.ajax({
 			      url: "stories/" + $("#image1").val(),
 			      type: "GET",
