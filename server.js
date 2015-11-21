@@ -40,8 +40,14 @@ app.use(express.static('static_files'));
 //             getUserContentValues(u)
 //     );
 // }
+
+db.serialize(function() {
+    db.run("CREATE TABLE IF NOT EXISTS counts (key TEXT, value INTEGER)");
+    db.run("INSERT INTO counts (key, value) VALUES (?, ?)", "counter", 0);
+});
  
 db.serialize(function() {
+  system.log('server called');
   if (!exists) {
     db.run("create table users"
                 + "(email TEXT, "
@@ -75,14 +81,14 @@ app.post('/Signup', function (req, res) {
   // must have a name!
   if (!email || !password || !username || !firstname || !lastname) {
     res.send('ERROR, not all required information entered');
+    console.log('invalid');
     return; // return early!
   }
 
   else {
-    db.all("SELECT * from users WHERE email="+email, function(err,rows) {
-      if (rows.length > 0) {
-        alreadyFound = true;
-      }
+    db.each("SELECT * from users WHERE email="+email, function(err,row) {
+      alreadyFound = true;
+      res.send
     });
   }
   if (!alreadyFound) {
@@ -98,24 +104,48 @@ app.post('/Signup', function (req, res) {
   // check if user's name is already in database; if so, send an error
 
 app.get('/users/*', function (req, res) {
-  var nameToLookup = req.params[0]; // this matches the '*' part of '/users/*' above
-  // try to look up in fakeDatabase
-  for (var i = 0; i < fakeDatabase.length; i++) {
-    var e = fakeDatabase[i];
-    if (e.name == nameToLookup) {
-      res.send(e);
-      return; // return early!
-    }
+  var user = req.body;
+
+  var email = user.inputEmail;
+  var password = user.inputPassword;
+  var username = user.inputuserName;
+  var firstname = user.inputfirstName;
+  var lastname = user.inputlastName;
+
+  var alreadyFound = false;
+
+
+
+  // must have a name!
+  if (!email || !password || !username || !firstname || !lastname) {
+    res.send('ERROR, not all required information entered');
+    console.log('invalid');
+    return; // return early!
   }
 
-  res.send('{}'); // failed, so return an empty JSON object!
+  else {
+    db.each("SELECT * from users WHERE email="+email, function(err,row) {
+      alreadyFound = true;
+      res.send
+    });
+  }
+  if (!alreadyFound) {
+    var stmt = db.prepare("INSERT into users VALUES(?,?,?,?,?)");
+    stmt.run(email, password, username, firstname, lastname);
+    stmt.finalize();
+    
+  }
 });
 
 
 app.get('/users', function (req, res) {
-  var allUsernames = [];
+  var allUsers = ['something'];
 
-  res.send(allUsernames);
+  db.get("SELECT email from users", function(err, row) {    
+    allUsers.push(row.email); 
+  });  
+  res.send(allUsers); 
+  
 });
 
 
