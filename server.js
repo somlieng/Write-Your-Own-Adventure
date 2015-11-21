@@ -41,13 +41,9 @@ app.use(express.static('static_files'));
 //     );
 // }
 
-db.serialize(function() {
-    db.run("CREATE TABLE IF NOT EXISTS counts (key TEXT, value INTEGER)");
-    db.run("INSERT INTO counts (key, value) VALUES (?, ?)", "counter", 0);
-});
  
 db.serialize(function() {
-  system.log('server called');
+  console.log('server called');
   if (!exists) {
     db.run("create table users"
                 + "(email TEXT, "
@@ -88,12 +84,14 @@ app.post('/Signup', function (req, res) {
   else {
     db.each("SELECT * from users WHERE email="+email, function(err,row) {
       alreadyFound = true;
+      console.log('email already in use!');
       res.send
     });
   }
   if (!alreadyFound) {
     var stmt = db.prepare("INSERT into users VALUES(?,?,?,?,?)");
     stmt.run(email, password, username, firstname, lastname);
+    console.log('entered into database!');
     stmt.finalize();
     
   }
@@ -103,49 +101,75 @@ app.post('/Signup', function (req, res) {
 
   // check if user's name is already in database; if so, send an error
 
-app.get('/users/*', function (req, res) {
+app.post('/users/*', function (req, res) {
   var user = req.body;
 
-  var email = user.inputEmail;
-  var password = user.inputPassword;
-  var username = user.inputuserName;
-  var firstname = user.inputfirstName;
-  var lastname = user.inputlastName;
+  var email = user.email;
+  var password = user.password;
+  var username = user.username;
+  var firstname = user.firstname;
+  var lastname = user.lastname;
 
   var alreadyFound = false;
 
+  console.log(email);
+  console.log(password);
+  console.log(username);
+  console.log(firstname);
+  console.log(lastname);
 
 
   // must have a name!
   if (!email || !password || !username || !firstname || !lastname) {
     res.send('ERROR, not all required information entered');
-    console.log('invalid');
+    console.log('invalid in users');
     return; // return early!
   }
 
   else {
-    db.each("SELECT * from users WHERE email="+email, function(err,row) {
-      alreadyFound = true;
-      res.send
+    db.all("SELECT * from users WHERE email=?",[email], function(err,rows) {
+      if (rows == undefined || rows.length == 0) {
+        var stmt = db.prepare("INSERT into users VALUES(?,?,?,?,?)");
+        stmt.run(email, password, username, firstname, lastname);
+        console.log('user inserted into db');
+        stmt.finalize();
+
+
+        res.set({
+          'Content-Type': 'text/plain',
+          'Content-Length': '100',
+          'email': email
+        });
+
+        res.get('/frontpage');
+      }
+      else {
+        console.log('email already exists!');
+      }
     });
   }
-  if (!alreadyFound) {
-    var stmt = db.prepare("INSERT into users VALUES(?,?,?,?,?)");
-    stmt.run(email, password, username, firstname, lastname);
-    stmt.finalize();
-    
-  }
+
+});
+
+app.get('/frontpage', function(req, res) {
+
+  console.log('GET /frontpage');
+
+  res.sendFile(__dirname + '/static_files/frontpage.html');
+
 });
 
 
 app.get('/users', function (req, res) {
   var allUsers = ['something'];
 
-  db.get("SELECT email from users", function(err, row) {    
+  console.log('/users');
+
+  db.each("SELECT email from users", function(err, row) {    
     allUsers.push(row.email); 
   });  
   res.send(allUsers); 
-  
+
 });
 
 
