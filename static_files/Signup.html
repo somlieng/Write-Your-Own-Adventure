@@ -50,8 +50,12 @@
 	        console.log("You received some data!", data);
 	        if (data == 'OK') {
 	          window.location.href = "frontpage.html";
-	        } else {
-	          $("#status").html("Error: could not create a new user!");
+	        } 
+	        else if (data == 'INCOMPLETE FIELDS') {
+	          $("#statusDiv").html("Please Fill Out All Fields!");
+	        }
+	        else if (data == 'USER ALREADY EXISTS') {
+			  $("#statusDiv").html("Email Already In Use!");
 	        }
 	      },
 	    });
@@ -101,6 +105,8 @@
 		        <label for="inputlastName" class="sr-only">enter your last name</label>
 		        <input type="text" id="inputlastName" class="form-control" placeholder="lastName" required>
 		        <br>
+
+		        <div id="statusDiv"></div>
 
 		       <button class="btn btn-lg btn-primary btn-block" type="submit" id="createButton">Create New Account</button>
 		       <button class="btn btn-lg btn-primary btn-block" type="submit" id="backToLogin">Back to Sign In</button>

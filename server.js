@@ -33,14 +33,6 @@ app.set('view engine', 'jade');
 app.use(express.static('static_files'));
 
 
-// public void addUser(User u) {
-//     mDB.insert(
-//             Users,
-//             null,
-//             getUserContentValues(u)
-//     );
-// }
-
  
 db.serialize(function() {
   console.log('server called');
@@ -84,7 +76,7 @@ app.post('/users/*', function (req, res) {
 
   // must have a name!
   if (!email || !password || !username || !firstname || !lastname) {
-    res.send('ERROR, not all required information entered');
+    res.send("INCOMPLETE FIELDS");
     console.log('invalid in users');
     return; // return early!
   }
@@ -98,16 +90,11 @@ app.post('/users/*', function (req, res) {
         stmt.finalize();
 
 
-        // res.set({
-        //   'Content-Type': 'text/plain',
-        //   'Content-Length': '100',
-        //   'email': email
-        // });
-
         res.send("OK");
       }
       else {
         console.log('email already exists!');
+        res.send("USER ALREADY EXISTS");
       }
     });
   }
