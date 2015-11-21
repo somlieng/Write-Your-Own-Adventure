@@ -46,7 +46,7 @@
 	               lastname: $("#inputlastName").val()
 	             },
 	      success: function( data ) {
-	      	localStorage.setItem("email",storeEmail.value);
+	      	localStorage.setItem("email", $("#inputEmail").val());
 	        console.log("You received some data!", data);
 	        if (data == 'OK') {
 	          window.location.href = "frontpage.html";
