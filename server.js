@@ -141,7 +141,6 @@ app.post('/users/*', function (req, res) {
           'email': email
         });
 
-        res.get('/frontpage');
       }
       else {
         console.log('email already exists!');

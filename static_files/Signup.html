@@ -43,7 +43,7 @@
 	      success: function( data ) {
 	        console.log("You received some data!", data);
 	        if (data == 'OK') {
-	          $("#status").html("Successfully created a new user!");
+	          window.location.href = "frontpage.html";
 	        } else {
 	          $("#status").html("Error: could not create a new user!");
 	        }
@@ -67,7 +67,7 @@
 
 		<div class="panel panel-default" id="signup-panel">
   			<div class="panel-body" id="panel-bg">
-		      <form class="form-signin">
+<!-- 		      <form class="form-signin"> -->
 		        <h2 class="form-signin-heading">Sign Up Here</h2>
 
 		        <label for="inputEmail" class="sr-only">enter your email address</label>
@@ -93,7 +93,7 @@
 		        <br>
 
 		       <button class="btn btn-lg btn-primary btn-block" type="submit" id="createButton">Create New Account</button>
-		      </form>
+<!-- 		      </form> -->
 		    </div>
 		</div>
 
@@ -101,6 +101,7 @@
 		</div>
 
 	    </div> <!-- /container -->
+	    <div id="status"></div>
 	
 	</body>
 </html>
