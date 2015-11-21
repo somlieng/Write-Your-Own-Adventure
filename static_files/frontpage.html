@@ -26,10 +26,15 @@
 			<!-- Load Content -->
 			var img = $("<img />").attr('src', 'misty.jpg')
 			    
+<<<<<<< HEAD
 			    $(document).ready(function() {
 			    	console.log("document loaded");
 			    	console.log(localStorage.getItem("email"));
 			        if(localStorage.getItem("email") == null || localStorage.getItem("email") == undefined) {
+=======
+			    $(document).ready(function(){
+			        if(localStorage.getItem("email")== null)){
+>>>>>>> origin/master
 			        	window.location.href = "login.html";
 			        }
 			    });
