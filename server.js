@@ -61,43 +61,6 @@ db.serialize(function() {
 //
 // To test with curl, run:
 //   curl -X POST --data "name=Carol&job=scientist&pet=dog.jpg" http://localhost:3000/users
-app.post('/Signup', function (req, res) {
-  var user = req.body;
-
-  var email = user.inputEmail;
-  var password = user.inputPassword;
-  var username = user.inputuserName;
-  var firstname = user.inputfirstName;
-  var lastname = user.inputlastName;
-
-  var alreadyFound = false;
-
-
-
-  // must have a name!
-  if (!email || !password || !username || !firstname || !lastname) {
-    res.send('ERROR, not all required information entered');
-    console.log('invalid');
-    return; // return early!
-  }
-
-  else {
-    db.each("SELECT * from users WHERE email="+email, function(err,row) {
-      alreadyFound = true;
-      console.log('email already in use!');
-      res.send
-    });
-  }
-  if (!alreadyFound) {
-    var stmt = db.prepare("INSERT into users VALUES(?,?,?,?,?)");
-    stmt.run(email, password, username, firstname, lastname);
-    console.log('entered into database!');
-    stmt.finalize();
-    
-  }
-
-});
-
 
   // check if user's name is already in database; if so, send an error
 
