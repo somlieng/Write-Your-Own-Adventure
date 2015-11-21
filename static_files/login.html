@@ -43,9 +43,9 @@
 	             },
 	      success: function( data ) {
 	        console.log("You received some data!", data);
-	        if (data == 'OK') {
-	          $("#status").html("Successfully created a new user!");
-	        } else {
+	         if (data == 'OK') {
+	          window.location.href = "frontpage.html";
+	        }  else {
 	          $("#status").html("Error: could not create a new user!");
 	        }
 	      },
