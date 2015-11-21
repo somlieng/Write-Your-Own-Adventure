@@ -26,43 +26,27 @@
 			<!-- Load Content -->
 			var img = $("<img />").attr('src', 'misty.jpg')
 			    
-<<<<<<< HEAD
-			    $(document).ready(function() {
-			    	console.log("document loaded");
-			    	console.log(localStorage.getItem("email"));
-			        if(localStorage.getItem("email") == null || localStorage.getItem("email") == undefined) {
-=======
-			    $(document).ready(function(){
-			        if(localStorage.getItem("email")== null)){
->>>>>>> origin/master
-			        	window.location.href = "login.html";
-			        }
-			    });
+
+		    $(document).ready(function() {
+		    	console.log("document loaded");
+		    	console.log(localStorage.getItem("email"));
+		        if(localStorage.getItem("email") == null || localStorage.getItem("email") == undefined) {
+		        	window.location.href = "login";
+		        }
+
+		        $("#logout").click(function() {
+			   		localStorage.removeItem("email");
+			   		location.reload();
+				});
+		    });
+
 
 			$("#title1").load("Randomenon");
 			$("#blurp1").load("Some Random Story");
 
 
-				$("#image1").click(function() {
-			   
-			    $.ajax({
-			      url: "stories/" + $("#image1").val(),
-			      type: "GET",
-			      dataType : "json", // this URL returns data in JSON format
 
-			      success: function( data ) {
-			        console.log("You received some data!", data);
 
-			        if (data.name) {
-			          $("#nameDiv").html("My name is " + data.name);
-			          $("#ageDiv").html("My job is " + data.job);
-			          $("#profileImage").attr("src", data.pet);
-			        } else {
-			          $("#status").html("Error: could not find user!");
-			        }
-			      },
-					});
-				});
 			</script>
 
 </head>
@@ -98,7 +82,9 @@
       <div class="jumbotron">
         <h1>Jumbotron heading</h1>
         <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+        
+        <p><a class="btn btn-lg btn-success" href="#" role="button" id="logout">Logout</a></p>
+
       </div>
 
       <div class="latest"><center><h3>Latest Posts</h3></center></div>
