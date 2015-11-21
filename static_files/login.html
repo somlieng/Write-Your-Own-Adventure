@@ -25,6 +25,12 @@
 
     <script type="text/javascript">
 	$(document).ready(function() {
+
+				if(localStorage.getItem("email") != null) {
+		        	window.location.href = "frontpage";
+		        }
+
+
 	  // define a generic Ajax error handler:
 	  // http://api.jquery.com/ajaxerror/
 	  $(document).ajaxError(function() {
