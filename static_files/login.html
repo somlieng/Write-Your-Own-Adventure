@@ -44,13 +44,10 @@
 	      success: function( data ) {
 	        console.log("You received some data!", data);
 	         if (data == 'OK') {
-<<<<<<< Updated upstream
 	          window.location.href = "frontpage.html";
 	          var storeEmail = document.getElementById("inputEmail");
 	          localStorage.setItem("email",storeEmail.value);
-=======
 	          window.location.href = "frontpage";
->>>>>>> Stashed changes
 	        }  else {
 	          $("#status").html("Error: could not create a new user!");
 	        }
@@ -88,14 +85,9 @@
 		        <label for="inputPassword" class="sr-only">Password</label>
 		        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 		        <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinButton">Sign in</button>
-<<<<<<< Updated upstream
-
-=======
 		        <button class="btn btn-lg btn-primary btn-block" type="submit" id="registerButton">Register</button>
-<<<<<<< HEAD
 <!-- 		      </form> -->
-=======
->>>>>>> Stashed changes
+
 		      <!-- </form> -->
 
 		    </div>

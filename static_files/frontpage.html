@@ -26,8 +26,10 @@
 			<!-- Load Content -->
 			var img = $("<img />").attr('src', 'misty.jpg')
 			    
-			    $.onload('load', function() {
-			        if(localStorage.getItem("email")="null" || localStorage.getItem("email"="undefined")){
+			    $(document).ready(function() {
+			    	console.log("document loaded");
+			    	console.log(localStorage.getItem("email"));
+			        if(localStorage.getItem("email") == null || localStorage.getItem("email") == undefined) {
 			        	window.location.href = "login.html";
 			        }
 			    });
