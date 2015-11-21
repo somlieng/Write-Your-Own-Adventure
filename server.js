@@ -135,12 +135,13 @@ app.post('/users/*', function (req, res) {
         stmt.finalize();
 
 
-        res.set({
-          'Content-Type': 'text/plain',
-          'Content-Length': '100',
-          'email': email
-        });
+        // res.set({
+        //   'Content-Type': 'text/plain',
+        //   'Content-Length': '100',
+        //   'email': email
+        // });
 
+        res.send("OK");
       }
       else {
         console.log('email already exists!');
@@ -159,15 +160,20 @@ app.get('/frontpage', function(req, res) {
 });
 
 
-app.get('/users', function (req, res) {
-  var allUsers = ['something'];
+app.get('/users/*', function (req, res) {
+
+
+  var email = req.params[0];
 
   console.log('/users');
+  db.all("SELECT * from users WHERE email=?",[email], function(err,rows) {
+    if (rows != undefined || rows.length > 0) {
+      console.log("user found");
+      res.send("OK");
+    }
 
-  db.each("SELECT email from users", function(err, row) {    
-    allUsers.push(row.email); 
-  });  
-  res.send(allUsers); 
+
+  });
 
 });
 
