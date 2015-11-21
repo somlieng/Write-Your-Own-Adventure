@@ -159,17 +159,31 @@ app.get('/frontpage', function(req, res) {
 
 });
 
+app.get('/', function(req, res) {
 
-app.get('/users/*', function (req, res) {
+  console.log('GET /frontpage');
+
+  res.sendFile(__dirname + '/static_files/login.html');
+
+});
 
 
-  var email = req.params[0];
+app.post('/login/*', function (req, res) {
+
+  var user = req.body;
+
+  var email = user.email;
+  var password = user.password;
 
   console.log('/users');
-  db.all("SELECT * from users WHERE email=?",[email], function(err,rows) {
-    if (rows != undefined || rows.length > 0) {
+  db.each("SELECT * from users WHERE email=?",[email], function(err,row) {
+    if (password == row.password) {
       console.log("user found");
       res.send("OK");
+    }
+    else {
+      console.log("invalid password");
+      res.send("FAIL");
     }
 
 
