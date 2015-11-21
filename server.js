@@ -167,6 +167,22 @@ app.get('/', function(req, res) {
 
 });
 
+app.get('/login', function(req, res) {
+
+  console.log('GET /login');
+
+  res.sendFile(__dirname + '/static_files/login.html');
+
+});
+
+app.get('/register', function(req, res) {
+
+  console.log('GET /register');
+
+  res.sendFile(__dirname + '/static_files/Signup.html');
+
+});
+
 
 app.post('/login/*', function (req, res) {
 
