@@ -146,6 +146,15 @@ app.get('/register', function(req, res) {
 
 });
 
+app.post('/delete'){
+  var user = req.body;
+
+  var email = user.email;
+
+  db.run("DELETE * from users WHERE email=?",[email]);
+
+  
+}
 
 app.post('/login/*', function (req, res) {
 
