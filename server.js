@@ -146,12 +146,17 @@ app.get('/register', function(req, res) {
 
 });
 
-app.post('/delete', function(req, res){
-  var user = req.body;
+app.post('/delete/*', function(req, res){
 
-  var email = user.email;
+  var email = req.body.email;
 
-  db.run("DELETE * from users WHERE email=?",[email]);
+  var stmt = db.prepare("DELETE FROM users WHERE email=?");
+  stmt.run(email);
+
+
+  stmt.finalize();
+
+  res.send("OK");
 
   
 });
