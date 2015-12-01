@@ -43,7 +43,14 @@ db.serialize(function() {
                 + "username TEXT, "
                 + "firstname TEXT, "
                 + "lastname TEXT)");
+    db.run("create table stories"
+                + "(email TEXT, "
+                + "parent TEXT, "
+                + "content TEXT, "
+                + "title TEXT)"
+                + "chapter TEXT");
   }
+
 });
 
 
