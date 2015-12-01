@@ -31,31 +31,34 @@
     
 
       <div class="header clearfix">
-        <nav>
+      <nav>
           <ul class="nav nav-pills pull-right">
            
             <li role="presentation" id="homeLink"><a href="#">Home</a></li>
 
-            <li role="presentation" id="profilePage">
+            
+            <li role="presentation" class="dropdown">
+       
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        
+        <ul class="dropdown-menu">
+            <li><a href="#">Add New Story</a></li>
+          <li id="updatePage"><a href="#">Update My Profile</a></li>
+          <li id="loginPage"><a href="#">Login</a></li>
+        </ul>
+      </li>
+
+      <li role="presentation" id="profilePage">
               <a href="#">
               <img border="0" id="profilePicture" src="girls.jpg" width="20" height="20" class="img-circle">
               </a>
             </li>
-
-            
-            <li role="presentation" class="dropdown">
-		   
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-		      <span class="glyphicon glyphicon-menu-hamburger"></span>
-		    </a>
-		    
-        <ul class="dropdown-menu">
-		      	<li><a href="#">Add New Story</a></li>
-			    <li id="updatePage"><a href="#">Update My Profile</a></li>
-			    <li id="loginPage"><a href="#">Login</a></li>
-		    </ul>
-		  </li>
+      
           </ul>
+
+         
         </nav>
         <h3 class="text-muted">Add New Story</h3>
 
