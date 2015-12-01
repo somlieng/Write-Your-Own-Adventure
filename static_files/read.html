@@ -28,29 +28,6 @@
            }
         }
 
-          $("#createButton").click(function() {
-        $.ajax({
-          // The URL for the request -- note the simple REST API!
-          // all URLs are relative to http://localhost:3000/
-          url: "users/",
-          type: "POST",
-          dataType : "text", // this URL returns a plain text string, not JSON
-          data : { story: $("#inputStory").val(),
-                   summary: $("#inputSummary").val(),
-                   title: $("#inputTitle").val()
-                 },
-          success: function( data ) {
-            localStorage.setItem("email",storeEmail.value);
-            console.log("You received some data!", data);
-            if (data == 'OK') {
-              window.location.href = "frontpage.html";
-            } else {
-              $("#status").html("Error: could not create a new user!");
-            }
-          },
-        });
-      });
-    });
 
       </script>
 
@@ -94,21 +71,28 @@
 
       </div>
 
-      
 
-      <div id="inputNewStory">
+
+      <div id="readStory">
+
+        <h2 id="tile">Title</h2>
+        <h3 id ="author">Author</h3>
+        <p id ="story">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         
-        <label for="inputTitle">What is your Story's title?</label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="parentButton">View Parent Story</button>
+        <br>
+
+         <label for="inputTitle">What is your chapter title?</label>
         <input type="text" class="form-control" id="inputTitle" placeholder="Title">
 
-        <label for="inputSummary" >Summarize your story!</label>
-        <textarea class="form-control" rows="6" id="inputSummary"></textarea>
-
+        
        
-        <label for="inputStory" >Paste your Story below:</label>
+        <label for="inputStory" >Paste your chapter below:</label>
         <textarea class="form-control" rows="12" id="inputStory"></textarea>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" id="createButton">Post</button>
+        <br>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="branchButton">Add New Chapte r</button>
 
       </div>
 
