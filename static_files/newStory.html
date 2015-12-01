@@ -27,6 +27,31 @@
               window.location.href = "login";
            }
         }
+
+          $("#createButton").click(function() {
+        $.ajax({
+          // The URL for the request -- note the simple REST API!
+          // all URLs are relative to http://localhost:3000/
+          url: "users/",
+          type: "POST",
+          dataType : "text", // this URL returns a plain text string, not JSON
+          data : { story: $("#inputStory").val(),
+                   summary: $("#inputSummary").val(),
+                   title: $("#inputTitle").val()
+                 },
+          success: function( data ) {
+            localStorage.setItem("email",storeEmail.value);
+            console.log("You received some data!", data);
+            if (data == 'OK') {
+              window.location.href = "frontpage.html";
+            } else {
+              $("#status").html("Error: could not create a new user!");
+            }
+          },
+        });
+      });
+    });
+
       </script>
 
 </head>
@@ -76,10 +101,7 @@
         <label for="inputSummary" >Summarize your story!</label>
         <textarea class="form-control" rows="6" id="inputSummary"></textarea>
 
-        <label for="inputCover">Optional: Upload an image for your story cover</label>
-        <input type="file" id="inputCover">
-
-
+       
         <label for="inputStory" >Paste your Story below:</label>
         <textarea class="form-control" rows="12" id="inputStory"></textarea>
 
