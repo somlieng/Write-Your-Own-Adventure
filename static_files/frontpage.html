@@ -42,6 +42,7 @@
 			   		localStorage.removeItem("email");
 			   		window.location.href = "login";
 				});
+
 			    $("#delete").click(function() {
 			    $.ajax({
 
@@ -85,27 +86,25 @@
 
             
             <li role="presentation" class="dropdown">
-		   
+       
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-		      <span class="glyphicon glyphicon-menu-hamburger"></span>
-		    </a>
-		    
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </a>
+        
         <ul class="dropdown-menu">
-		      	<li><a href="#">Add New Story</a></li>
-			    <li id="updatePage"><a href="#">Update My Profile</a></li>
-			    <li id="loginPage"><a href="#">Login</a></li>
-		    </ul>
-		  </li>
+            <li id="newStoryPage"><a href="newStory.html">Add New Story</a></li>
+          <li id="updatePage"><a href="update.html">Update My Profile</a></li>
+          <li id="loginPage"><a href="login.html">Login</a></li>
+        </ul>
+      </li>
 
-		  <li role="presentation" id="profilePage">
+      <li role="presentation" id="profilePage">
               <a href="#">
               <img border="0" id="profilePicture" src="girls.jpg" width="20" height="20" class="img-circle">
               </a>
             </li>
-		  
-          </ul>
 
-         
+          </ul>
         </nav>
         <h3 class="text-muted">Story Tree</h3>
 
