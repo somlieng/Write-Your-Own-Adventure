@@ -28,9 +28,9 @@
     <script type="text/javascript">
 	$(document).ready(function() {
 
-				if(localStorage.getItem("email") != null) {
-		        	window.location.href = "frontpage";
-		        }
+		if(localStorage.getItem("email") != null) {
+	    	window.location.href = "frontpage";
+	    }
 
 
 	  // define a generic Ajax error handler:
@@ -50,21 +50,21 @@
 	               email: $("#inputEmail").val()
 	             },
 	      success: function( data ) {
-	        console.log("You received some data!", data);
-	         if (data == 'OK') {
-	          window.location.href = "frontpage.html";
+
+	        if (data == 'OK') {
+
 	          var storeEmail = document.getElementById("inputEmail");
 	          localStorage.setItem("email",storeEmail.value);
 	          window.location.href = "frontpage";
 
-	          window.location.href = "frontpage.html";
-	          var storeEmail = document.getElementById("inputEmail");
-	          localStorage.setItem("email",storeEmail.value);
 
-	          window.location.href = "frontpage";
-
-	        }  else {
-	          $("#status").html("Error: could not create a new user!");
+	        }  
+	        else if (data == 'BAD_PASSWORD') {
+	          $("#statusDiv").html("Incorrect Password!");
+	        }
+	        else {
+	        	console.log(data);
+	          $("#statusDiv").html("User Not Found!");
 	        }
 	      },
 	    });
@@ -99,6 +99,8 @@
 		        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
 		        <label for="inputPassword" class="sr-only">Password</label>
 		        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+		        <div id="statusDiv"></div>
+
 		        <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinButton">Sign In</button>
 		        <button class="btn btn-lg btn-primary btn-block" type="submit" id="registerButton">Register</button>
 

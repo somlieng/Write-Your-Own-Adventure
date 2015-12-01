@@ -155,19 +155,18 @@ app.post('/login/*', function (req, res) {
   var email = user.email;
   var password = user.password;
 
+
   console.log('/users');
   db.each("SELECT * from users WHERE email=?",[email], function(err,row) {
     if (password == row.password) {
-      console.log("user found");
       res.send("OK");
     }
     else {
       console.log("invalid password");
-      res.send("FAIL");
+      res.send("BAD_PASSWORD")
     }
-
-
   });
+
 
 });
 

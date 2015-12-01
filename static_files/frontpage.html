@@ -29,7 +29,7 @@
 
 		    $(document).ready(function() {
 		    	console.log("document loaded");
-		    	console.log(localStorage.getItem("email"));
+		    	console.log("stored email is : " + localStorage.getItem("email"));
 		        if(localStorage.getItem("email") == null) {
 		        	window.location.href = "login";
 		        }
@@ -40,15 +40,14 @@
 
 		        $("#logout").click(function() {
 			   		localStorage.removeItem("email");
-			   		location.reload();
+			   		window.location.href = "login";
 				});
 			    $("#delete").click(function() {
 			    $.ajax({
-	      // The URL for the request -- note the simple REST API!
-	      // all URLs are relative to http://localhost:3000/
+
 			      url: "delete/",
 			      type: "POST",
-			      dataType : "text", // this URL returns a plain text string, not JSON
+			      dataType : "text", 
 			      data : { email: localStorage.getItem("email") },
 			      success: function( data ) {
 			        console.log("You received some data!", data);
@@ -66,12 +65,6 @@
 			   		
 				});
 		    });
-
-
-			$("#title1").load("Randomenon");
-			$("#blurp1").load("Some Random Story");
-
-
 
 
 			</script>
