@@ -25,10 +25,11 @@
 			$(document).ready(function() {
 				
 				var emailName = localStorage.getItem("email");
+				console.log(emailName);
 				var $inputEmail = $('#inputEmail');
 
 				if(emailName !=null){
-					$inputEmail.val(emailName);
+					$inputEmail.html(emailName);
 				}
 
 
@@ -103,6 +104,7 @@
         <div>
 
         <label for="inputEmail" class="sr-only">Update your email address</label>
+		        
 		        <p id="inputEmail">email</p> 
 		        
 		        <br>
