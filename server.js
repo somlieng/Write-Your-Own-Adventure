@@ -51,17 +51,19 @@ db.serialize(function() {
                 + "title TEXT,"
                 + "chapter TEXT)");
     var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-    var s = "Once upon a midnight dreary, while I pondered, weak and weary, \n" +
-      "Over many a quaint and curious volume of forgotten lore,  \n" +
-      "While I nodded, nearly napping, suddenly there came a tapping,  \n" +
-      "As of some one gently rapping, rapping at my chamber door.  \n" +
-      "Tis some visitor, I muttered, tapping at my chamber door-  \n" +
+    var s = "Once upon a midnight dreary, while I pondered, weak and weary, <br>" +
+      "Over many a quaint and curious volume of forgotten lore,  <br>" +
+      "While I nodded, nearly napping, suddenly there came a tapping,  <br>" +
+      "As of some one gently rapping, rapping at my chamber door.  <br>" +
+      "Tis some visitor, I muttered, tapping at my chamber door-  <br>" +
       "Only this, and nothing more."
 
     stmt.run("poe@gmail.com", "root", s, "The Raven", "Chapter 1");
     stmt.finalize();
+
+    var t = "A Child was standing on a street-corner. He leaned with one shoulder against a high board-fence and swayed the other to and fro, the while kicking carelessly at the gravel. Sunshine beat upon the cobbles, and a lazy summer wind raised yellow dust which trailed in clouds down the avenue. Clattering trucks moved with indistinctness through it. The child stood dreamily gazing. After a time, a little dark-brown dog came trotting with an intent air down the sidewalk. A short rope was dragging from his neck. Occasionally he trod upon the end of it and stumbled."
     var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-    stmt.run("email2", "parent2", "content2", "title2", "chapter2");
+    stmt.run("crane@yahoo.com", "root", t, "A Dark Brown Dog", "Chapter 1");
     stmt.finalize();
     var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
     stmt.run("email3", "parent3", "content3", "title3", "chapter3");
