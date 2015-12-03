@@ -32,6 +32,27 @@
 					$inputEmail.html(emailName);
 				}
 
+		$("#delete").click(function() {
+			    $.ajax({
+
+			      url: "delete/",
+			      type: "POST",
+			      dataType : "text", 
+			      data : { email: localStorage.getItem("email") },
+			      success: function( data ) {
+			        console.log("You received some data!", data);
+			         if (data == 'OK') {
+
+			          localStorage.removeItem("email");
+
+			          window.location.href = "login";
+
+			        }  else {
+			          $("#status").html("Error: could not delete user!");
+			        }
+			      },
+			    });
+
 
 	  $("#upDateButton").click(function() {
 	    $.ajax({
@@ -127,6 +148,8 @@
 		        <br>
 
 		       <button class="btn btn-lg btn-primary btn-block" type="submit" id="updateButton">Update New Account</button>
+
+		      <button class="btn btn-lg btn-primary btn-block" href="#" role="button" id="delete">Delete Account</button>
         	
         </div>
 

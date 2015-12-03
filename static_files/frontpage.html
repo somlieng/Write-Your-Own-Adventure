@@ -28,41 +28,22 @@
 			    
 
 		    $(document).ready(function() {
-		    	console.log("document loaded");
-		    	console.log("stored email is : " + localStorage.getItem("email"));
-		        if(localStorage.getItem("email") == null) {
-		        	window.location.href = "login";
-		        }
-		        else {
-		        	$("#welcomeTag").html("Welcome " + localStorage.getItem("email") + "!");
-
-		        }
-
-		        $("#logout").click(function() {
-			   		localStorage.removeItem("email");
-			   		window.location.href = "login";
-				});
-
-			    $("#delete").click(function() {
-			    $.ajax({
-
-			      url: "delete/",
-			      type: "POST",
-			      dataType : "text", 
-			      data : { email: localStorage.getItem("email") },
-			      success: function( data ) {
-			        console.log("You received some data!", data);
-			         if (data == 'OK') {
-
-			          localStorage.removeItem("email");
-
-			          window.location.href = "login";
-
-			        }  else {
-			          $("#status").html("Error: could not delete user!");
+			    	console.log("document loaded");
+			    	console.log("stored email is : " + localStorage.getItem("email"));
+			        if(localStorage.getItem("email") == null) {
+			        	window.location.href = "login";
 			        }
-			      },
-			    });
+			        else {
+			        	$("#welcomeTag").html("Welcome " + localStorage.getItem("email") + "!");
+
+			        }
+
+			        $("#logout").click(function() {
+				   		localStorage.removeItem("email");
+				   		window.location.href = "login";
+					});
+
+			    
 			   		
 				});
 		    });
@@ -116,7 +97,7 @@
         
         <p><a class="btn btn-lg btn-success" href="#" role="button" id="logout">Sign Out</a></p>
 
-        <p><a class="btn btn-lg btn-success" href="#" role="button" id="delete">Delete Account</a></p>
+        
 
       </div>
 
