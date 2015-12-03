@@ -28,6 +28,7 @@
 			    
 
 		    $(document).ready(function() {
+<<<<<<< Updated upstream
 			    	console.log("document loaded");
 			    	console.log("stored email is : " + localStorage.getItem("email"));
 			        if(localStorage.getItem("email") == null) {
@@ -35,6 +36,54 @@
 			        }
 			        else {
 			        	$("#welcomeTag").html("Welcome " + localStorage.getItem("email") + "!");
+=======
+          $.ajax({
+
+            url: "topstories/",
+            type: "GET",
+            dataType : "json", 
+            success: function( data ) {
+              console.log("You received some data!", data);
+              $("#title1").html(data.stories[0].title + " - " + data.stories[0].chapter);
+              $("#title2").html(data.stories[1].title + " - " + data.stories[1].chapter);
+              $("#title3").html(data.stories[2].title + " - " + data.stories[2].chapter);
+              $("#title4").html(data.stories[3].title + " - " + data.stories[3].chapter);
+              $("#title5").html(data.stories[4].title + " - " + data.stories[4].chapter);
+              $("#title6").html(data.stories[5].title + " - " + data.stories[5].chapter);
+               
+            },error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+            }   
+          });
+
+
+
+		    	console.log("document loaded");
+		    	console.log("stored email is : " + localStorage.getItem("email"));
+		        if(localStorage.getItem("email") == null) {
+		        	window.location.href = "login";
+		        }
+		        else {
+		        	$("#welcomeTag").html("Welcome " + localStorage.getItem("email") + "!");
+
+		        }
+
+		        $("#logout").click(function() {
+			   		localStorage.removeItem("email");
+			   		window.location.href = "login";
+				});
+
+			    $("#delete").click(function() {
+			    $.ajax({
+
+			      url: "delete/",
+			      type: "POST",
+			      dataType : "text", 
+			      data : { email: localStorage.getItem("email") },
+			      success: function( data ) {
+			        console.log("You received some data!", data);
+			         if (data == 'OK') {
+>>>>>>> Stashed changes
 
 			        }
 
@@ -145,5 +194,3 @@
 
 </body>
 </html>
-	
-	

@@ -34,6 +34,7 @@ app.use(express.static('static_files'));
 
 
  
+ 
 db.serialize(function() {
   console.log('server called');
   if (!exists) {
@@ -47,12 +48,37 @@ db.serialize(function() {
                 + "(email TEXT, "
                 + "parent TEXT, "
                 + "content TEXT, "
-                + "title TEXT)"
-                + "chapter TEXT");
+                + "title TEXT,"
+                + "chapter TEXT)");
+    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+    var s = "Once upon a midnight dreary, while I pondered, weak and weary, \n" +
+      "Over many a quaint and curious volume of forgotten lore,  \n" +
+      "While I nodded, nearly napping, suddenly there came a tapping,  \n" +
+      "As of some one gently rapping, rapping at my chamber door.  \n" +
+      "Tis some visitor, I muttered, tapping at my chamber door-  \n" +
+      "Only this, and nothing more."
+
+    stmt.run("poe@gmail.com", "root", s, "The Raven", "Chapter 1");
+    stmt.finalize();
+    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+    stmt.run("email2", "parent2", "content2", "title2", "chapter2");
+    stmt.finalize();
+    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+    stmt.run("email3", "parent3", "content3", "title3", "chapter3");
+    stmt.finalize();
+    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+    stmt.run("email4", "parent4", "content4", "title4", "chapter4");
+    stmt.finalize();
+    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+    stmt.run("email5", "parent5", "content5", "title5", "chapter5");
+    stmt.finalize();
+    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+    stmt.run("email6", "parent6", "content6", "title6", "chapter6");
+    stmt.finalize();
+    console.log("Add six items to stories");
   }
 
 });
-
 
 
 
@@ -174,6 +200,62 @@ app.post('/login/*', function (req, res) {
     }
   });
 
+
+});
+
+app.post('/update/*', function (req, res) {
+  var user = req.body;
+
+  var email = user.email;
+  var password = user.password;
+  var username = user.username;
+  var firstname = user.firstname;
+  var lastname = user.lastname;
+
+  var alreadyFound = false;
+
+  console.log(email);
+  console.log(password);
+  console.log(username);
+  console.log(firstname);
+  console.log(lastname);
+
+
+  // must have a name!
+  if (!email || !password || !username || !firstname || !lastname) {
+    res.send("INCOMPLETE FIELDS");
+    console.log('invalid in users');
+    return; // return early!
+  }
+
+  else {
+    db.each("SELECT * from users WHERE email=?",[email], function(err,row) {
+        var stmt = db.prepare("UPDATE users VALUES(?,?,?,?,?)");
+        stmt.run(email, password, username, firstname, lastname);
+        console.log('user inserted into db');
+        stmt.finalize();
+
+
+      res.send("OK");
+    });
+  }
+
+});
+
+app.get('/topstories', function (req, res) {
+
+  db.all("SELECT * FROM stories LIMIT 6", function(err,rows) {
+    res.send({"stories":[
+  {email: rows[0].email, parent: rows[0].parent, content: rows[0].content, title: rows[0].title, chapter: rows[0].chapter},
+  {email: rows[1].email, parent: rows[1].parent, content: rows[1].content, title: rows[1].title, chapter: rows[1].chapter},
+  {email: rows[2].email, parent: rows[2].parent, content: rows[2].content, title: rows[2].title, chapter: rows[2].chapter},
+  {email: rows[3].email, parent: rows[3].parent, content: rows[3].content, title: rows[3].title, chapter: rows[3].chapter},
+  {email: rows[4].email, parent: rows[4].parent, content: rows[4].content, title: rows[4].title, chapter: rows[4].chapter},
+  {email: rows[5].email, parent: rows[5].parent, content: rows[5].content, title: rows[5].title, chapter: rows[5].chapter}
+]});
+  });
+
+  
 
 });
 
