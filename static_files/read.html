@@ -25,7 +25,7 @@
         $(document).ready(function() {
            $("#loginPage").click(function() {
               window.location.href = "login";
-           }
+           });
 
             if(localStorage.getItem("title") == null || localStorage.getItem("author") == null || localStorage.getItem("chapter") == null) {
               window.location.href = "login";
@@ -40,9 +40,10 @@
                        email: localStorage.getItem("author")
                      },
               success: function( data ) {
-                $('#title').html(data.story[0].title);
-                $('#chapter').html(data.story[0].chapter);
-                $('#author').html(data.story[0].author);
+                console.log(data.story[0].parent);
+                $('#title').html(data.story[0].title + " - " + data.story[0].chapter);
+                $('#story').html(data.story[0].content);
+                $('#author').html(data.story[0].email);
               },
             });
 
@@ -50,7 +51,7 @@
             localStorage.removeItem("email");
             window.location.href = "login";
         });
-        }
+        });
 
 
       </script>
@@ -99,7 +100,7 @@
 
       <div id="readStory">
 
-        <h2 id="tile">Title</h2>
+        <h2 id="title">Title</h2>
         <h3 id ="author">Author</h3>
         <p id ="story">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         

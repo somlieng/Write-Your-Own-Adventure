@@ -34,7 +34,7 @@
               console.log("You received some data!", data);
 
               for (var i = 0; i < 6; i++) {
-                $("#title" + (i+1)).html("<b>" + data.stories[i].title + "</b>, ");
+                $("#title" + (i+1)).html("<b>" + data.stories[i].title + "</b>");
                 $("#chapter" + (i+1)).html(data.stories[i].chapter + "<br>");
                 $("#blurp" + (i+1)).html(data.stories[i].content);
                 $("#author" + (i+1)).html(data.stories[i].email + "<br><br>");
@@ -73,14 +73,7 @@
         });
       </script>
 
-       <style>
-       .title{color:blue;}
-       .chapter{color:blue;}
-       .title:hover{color:purple;}
-       .chapter:hover{color:purple;}
-       .chapter:hover + .title{color:purple;}
-       .title:hover + .chapter{color:purple;}
-       </style>
+       <style>.story:hover{color:grey;}</style>
 </head>
 
 <body>
@@ -138,6 +131,7 @@
         <img id="image1" style="width: 500px; text-align:center"/>
         <div class="story">
          <div id="title1" class="title" style="float:left">Story 1</div>
+         <div style="float:left">,&nbsp;</div>
          <div id="chapter1" class="chapter"></div>
          <div id="blurp1" class="content"></div>
          <p style="float:left;"><i>Published by:</i>&nbsp;</p>
@@ -147,6 +141,7 @@
         <img id="image2" style="width: 500px; text-align:center" />
         <div class="story">
           <div id="title2" class="title" style="float:left;">Story 2</div>
+          <div style="float:left">,&nbsp;</div>
           <div id="chapter2" class="chapter"></div>
           <div id="blurp2" class="content"></div>
           <p style="float:left;"><i>Published by:</i>&nbsp;</p>
@@ -156,6 +151,7 @@
         <img id="image3" style="width: 500px; text-align:center" />
         <div class="story">
           <div id="title3" class="title" style="float:left;">Story 3</div>
+          <div style="float:left">,&nbsp;</div>
           <div id="chapter3" class="chapter"></div>
           <div id="blurp3" class="content"></div>
           <p style="float:left;"><i>Published by:</i>&nbsp;</p>
@@ -166,6 +162,7 @@
         <img id="image4" style="width: 500px; text-align:center" />
         <div class="story">
           <div id="title4" class="title" style="float:left;">Story 4</div>
+          <div style="float:left">,&nbsp;</div>
           <div id="chapter4" class="chapter"></div>
           <div id="blurp4" class="content"></div>
           <p style="float:left;"><i>Published by:</i>&nbsp;</p>
@@ -175,6 +172,7 @@
         <img id="image5" style="width: 500px; text-align:center" />
         <div class="story">
           <div id="title5" class="title" style="float:left;">Story 5</div>
+          <div style="float:left">,&nbsp;</div>
           <div id="chapter5" class="chapter"></div>
           <div id="blurp5" class="content"></div>
           <p style="float:left;"><i>Published by:</i>&nbsp;</p>
@@ -184,6 +182,7 @@
          <img id="image6" style="width: 500px; text-align:center" />
          <div class="story">
           <div id="title6" class="title" style="float:left;">Story 6</div>
+          <div style="float:left">,&nbsp;</div>
           <div id="chapter6" class="chapter"></div>
           <div id="blurp6" class="content"></div>
           <p style="float:left;"><i>Published by:</i>&nbsp;</p>

@@ -330,19 +330,19 @@ app.get('/profile', function(req, res) {
 
 });
 
-// app.post('/story/*', function (req, res) {
-//   var story = req.body;
+app.post('/story/*', function (req, res) {
+  var story = req.body;
 
-//   var title = story.title;
-//   var content = story.chapter;
-//   var email = story.email;
+  var title = story.title;
+  var chapter = story.chapter;
+  var email = story.email;
 
-//   res.redirect(__dirname + '/static_files/read.html');
+  console.log(title + " | " + chapter + " | " + email);
 
-//   db.each("SELECT * from stories WHERE title=? AND chapter=? AND email=?",[title, chapter, email], function(err,row) {
-//     res.send(row);
-//   }
-// });
+  db.all("SELECT * from stories WHERE title=\"" + title + "\" AND chapter=\"" + chapter + "\" AND email=\"" + email + "\"", function(err,row) {
+    res.send({"story":[{email: row[0].email, parent: row[0].parent, content: row[0].content, title: row[0].title, chapter: row[0].chapter}]});
+  });
+});
 
 
 app.get('/topstories', function (req, res) {
