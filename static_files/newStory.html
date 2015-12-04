@@ -23,11 +23,6 @@
 
 			 <script type="text/javascript">
         $(document).ready(function() {
-           $("#loginPage").click(function() {
-              window.location.href = "login";
-           }
-        }
-
         
             $("#logout").click(function() {
             localStorage.removeItem("email");
@@ -56,15 +51,19 @@
           },
         });
       });
+          $("#homeLink").click(function() {
+              window.location.href = "frontpage";
+          });
     });
+
 
       </script>
 
 </head>
 
-<body>
+<body background="trees.jpg">
 
-    <div class="container">
+    <div class="container" style="background-color:white;">
 
     
 
@@ -81,10 +80,10 @@
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </a>
         
-        <ul class="dropdown-menu">
-           <li id="newStoryPage"><a href="newStory.html">Add New Story</a></li>
-          <li id="updatePage"><a href="update.html">Update My Profile</a></li>
-          <li id="logout"><a href="#">Logout</a></li>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li id="viewProfile"><a href="profile">View Profile</a></li>
+          <li id="updatePage"><a href="update.html">Update Profile</a></li>
+          <li id="logout"><a href="#">Log Out</a></li>
         </ul>
       </li>
 

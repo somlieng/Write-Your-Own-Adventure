@@ -48,9 +48,13 @@
             });
 
             $("#logout").click(function() {
-            localStorage.removeItem("email");
-            window.location.href = "login";
-        });
+              localStorage.removeItem("email");
+              window.location.href = "login";
+            });
+
+            $("#homeLink").click(function() {
+              window.location.href = "frontpage";
+            });
         });
 
 
@@ -58,9 +62,9 @@
 
 </head>
 
-<body>
+<body background="trees.jpg">
 
-    <div class="container">
+    <div class="container" style="background-color:white;">
 
     
 
@@ -77,10 +81,11 @@
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </a>
         
-        <ul class="dropdown-menu">
-           <li id="newStoryPage"><a href="newStory.html">Add New Story</a></li>
-          <li id="updatePage"><a href="update.html">Update My Profile</a></li>
-          <li id="logout"><a href="#">Logout</a></li>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li id="newStoryPage"><a href="newStory.html">Add New Story</a></li>
+          <li id="viewProfile"><a href="profile">View Profile</a></li>
+          <li id="updatePage"><a href="update.html">Update Profile</a></li>
+          <li id="logout"><a href="#">Log Out</a></li>
         </ul>
       </li>
 
