@@ -32,12 +32,10 @@
             dataType : "json", 
             success: function( data ) {
               console.log("You received some data!", data);
-              $("#title1").html(data.stories[0].title + "<br>" + data.stories[0].content + "<br><br>");
-              $("#title2").html(data.stories[1].title + "<br>" + data.stories[1].content + "<br><br>");
-              $("#title3").html(data.stories[2].title + " - " + data.stories[2].chapter);
-              $("#title4").html(data.stories[3].title + " - " + data.stories[3].chapter);
-              $("#title5").html(data.stories[4].title + " - " + data.stories[4].chapter);
-              $("#title6").html(data.stories[5].title + " - " + data.stories[5].chapter);
+              
+              for (var i = 0; i < 6; i++) {
+              $("#title" + (i+1)).html(data.stories[i].title + "<br>" + data.stories[i].content + "<br><br>");
+              }
                
             },error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
