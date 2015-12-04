@@ -244,6 +244,18 @@ app.post('/update/*', function (req, res) {
 
 });
 
+app.post('/story/*', function (req, res)) {
+  var story = req.body;
+
+  var title = story.title;
+  var content = story.chapter;
+  var email = story.email;
+
+  db.each("SELECT * from stories WHERE title=? AND chapter=? AND email=?",[title, chapter, email], function(err,row) {
+    res.send
+  }
+}
+
 app.get('/topstories', function (req, res) {
 
   db.all("SELECT * FROM stories LIMIT 6", function(err,rows) {
