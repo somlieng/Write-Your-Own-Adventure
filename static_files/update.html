@@ -3,64 +3,69 @@
 <head>
 
 <meta charset="utf-8">
-   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!-- Enable Mobile view with viewport meta tag -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Enable Mobile view with viewport meta tag -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- Title for the page -->
-		<title>StoryTree Add New Stories</title>
+	<!-- Title for the page -->
+	<title>StoryTree Add New Stories</title>
 
-		<!-- Bootstrap Framework Dependencies -->
-		
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Bootstrap Framework Dependencies -->
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-		<!-- jQuery library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-		<!-- Latest compiled JavaScript -->
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-				
-				var emailName = localStorage.getItem("email");
-				console.log(emailName);
-				var $inputEmail = $('#inputEmail');
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			var emailName = localStorage.getItem("email");
+			console.log(emailName);
+			var $inputEmail = $('#inputEmail');
 
-				if(localStorage.getItem("email") !=null){
-					$('#inputEmail').html(localStorage.getItem("email"));
-				}
+			if(localStorage.getItem("email") !=null){
+				$('#inputEmail').html(localStorage.getItem("email"));
+			}
 
 				
             $("#logout").click(function() {
-            localStorage.removeItem("email");
-            window.location.href = "login";
-        });
+	            localStorage.removeItem("email");
+	            window.location.href = "login";
+       		});
 
 		$("#delete").click(function() {
-			    $.ajax({
+		    $.ajax({
 
-			      url: "delete/",
-			      type: "POST",
-			      dataType : "text", 
-			      data : { email: localStorage.getItem("email") },
-			      success: function( data ) {
-			        console.log("You received some data!", data);
-			         if (data == 'OK') {
+		      url: "delete/",
+		      type: "POST",
+		      dataType : "text", 
+		      data : { email: localStorage.getItem("email") },
+		      success: function( data ) {
+		        console.log("You received some data!", data);
 
-			          localStorage.removeItem("email");
+		        if (data == 'OK') {
+			        localStorage.removeItem("email");
+			        window.location.href = "login";
+		        }  
 
-			          window.location.href = "login";
+		        else {
+		          	$("#status").html("Error: could not delete user!");
+		        }
+		      },
+		    });
+		});
 
-			        }  else {
-			          $("#status").html("Error: could not delete user!");
-			        }
-			      },
-			    });
+		$("#homeLink").click(function() {
+			window.location.href = "frontpage";
+		});
 
 
-	  $("#upDateButton").click(function() {
+	  $("#updateButton").click(function() {
 	    $.ajax({
 	      // The URL for the request -- note the simple REST API!
 	      // all URLs are relative to http://localhost:3000/
@@ -77,14 +82,13 @@
 	      	localStorage.setItem("email",storeEmail.value);
 	        console.log("You received some data!", data);
 	        if (data == 'OK') {
-	          window.location.href = "frontpage.html";
+	          window.location.href = "frontpage";
 	        } else {
 	          $("#status").html("Error: could not create a new user!");
 	        }
 	      },
 	    });
 	  });
-	});
 	});
 
 	</script>
@@ -140,25 +144,34 @@
 		        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
 		        <br>
+		        <button class="btn btn-lg btn-primary btn-block" type="submit" id="updatePassword">Update Password</button>
+				<br><br><br>
+
 		        <label for="inputuserName" class="sr-only">Update your username</label>
 		        <input type="text" id="inputuserName" class="form-control" placeholder="User Name" required>
 		        <br>
 
-		        <br>
+
+		        <button class="btn btn-lg btn-primary btn-block" type="submit" id="updateUserName">Update Username</button>
+
+				<br><br><br>
+
 		        <label for="inputfirstName" class="sr-only">Update your first name</label>
 		        <input type="text" id="inputfirstName" class="form-control" placeholder="First Name" required>
 		        <br>
 
-		        <br>
+		        <button class="btn btn-lg btn-primary btn-block" type="submit" id="updateFirstName">Update First Name</button>
+				<br><br><br>
+
 		        <label for="inputlastName" class="sr-only">Update your last name</label>
 		        <input type="text" id="inputlastName" class="form-control" placeholder="Last Name" required>
 		        <br>
 
-		       <button class="btn btn-lg btn-primary btn-block" type="submit" id="updateButton">Update New Account</button>
+		       <button class="btn btn-lg btn-primary btn-block" type="submit" id="updateLastName">Update Last Name</button>
 
-		       <br><br><br>
+		       <br><br><br><br><br>
 
-		      <button class="btn btn-lg btn-primary btn-block" href="#" role="button" id="delete">Delete Account</button>
+		      <button class="btn btn-danger btn-lg btn-primary btn-block" href="#" role="button" id="delete">Delete Account</button>
         	
         </div>
 
