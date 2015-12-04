@@ -34,7 +34,7 @@
               console.log("You received some data!", data);
               
               for (var i = 0; i < 6; i++) {
-              $("#title" + (i+1)).html(data.stories[i].title + "<br>" + data.stories[i].content + "<br><br>");
+              $("#title" + (i+1)).html("<b>" + data.stories[i].title + " - " + data.stories[i].chapter + "</b><br>" + data.stories[i].content + "<br><i>Published by: " + data.stories[i].email + "</i><br><br>");
               }
                
             },error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -53,24 +53,16 @@
             localStorage.removeItem("email");
             window.location.href = "login";
         });
-          $("#delete").click(function() {
-          $.ajax({
-            url: "delete/",
-            type: "POST",
-            dataType : "text", 
-            data : { email: localStorage.getItem("email") },
-            success: function( data ) {
-              console.log("You received some data!", data);
-               if (data == 'OK') {
-                localStorage.removeItem("email");
-                window.location.href = "login";
-              }  else {
-                $("#status").html("Error: could not delete user!");
-              }
-            },
+
+          $(".story").click(function(){
+            console.log("CLICKED!");
+            /*localStorage.setItem('title',);
+            localStorage.setItem('chapter',);
+            localStorage.setItem('author',);
+
+            window.location.href = "read.html";*/
           });
-            
-        });
+
         });
       </script>
 

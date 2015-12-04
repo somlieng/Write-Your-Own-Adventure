@@ -244,7 +244,7 @@ app.post('/update/*', function (req, res) {
 
 });
 
-app.post('/story/*', function (req, res)) {
+app.post('/story/*', function (req, res) {
   var story = req.body;
 
   var title = story.title;
@@ -255,8 +255,8 @@ app.post('/story/*', function (req, res)) {
 
   db.each("SELECT * from stories WHERE title=? AND chapter=? AND email=?",[title, chapter, email], function(err,row) {
     res.send(row);
-  }
-}
+  });
+});
 
 app.get('/topstories', function (req, res) {
 
