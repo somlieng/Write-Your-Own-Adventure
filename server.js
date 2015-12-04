@@ -160,6 +160,38 @@ app.get('/login', function(req, res) {
 
 });
 
+app.get('/new', function(req, res) {
+
+  console.log('GET /new');
+
+  res.sendFile(__dirname + '/static_files/newStory.html');
+
+});
+
+app.get('/profile', function(req, res) {
+
+  console.log('GET /profile');
+
+  res.sendFile(__dirname + '/static_files/profile.html');
+
+});
+
+app.get('/update', function(req, res) {
+
+  console.log('GET /update');
+
+  res.sendFile(__dirname + '/static_files/update.html');
+
+});
+
+app.get('/read', function(req, res) {
+
+  console.log('GET /read');
+
+  res.sendFile(__dirname + '/static_files/read.html');
+
+});
+
 app.get('/register', function(req, res) {
 
   console.log('GET /register');
@@ -336,8 +368,6 @@ app.post('/story/*', function (req, res) {
   var title = story.title;
   var chapter = story.chapter;
   var email = story.email;
-
-  console.log(title + " | " + chapter + " | " + email);
 
   db.all("SELECT * from stories WHERE title=\"" + title + "\" AND chapter=\"" + chapter + "\" AND email=\"" + email + "\"", function(err,row) {
     res.send({"story":[{email: row[0].email, parent: row[0].parent, content: row[0].content, title: row[0].title, chapter: row[0].chapter}]});

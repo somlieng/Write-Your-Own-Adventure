@@ -64,6 +64,14 @@
 			window.location.href = "frontpage";
 		});
 
+		$("#newStoryPage").click(function() {
+         window.location.href = "new";
+        });
+
+        $("#viewProfile").click(function() {
+          window.location.href = "profile";
+        });
+
 
 	  $("#updatePassword").click(function() {
 	  	if ($("#inputPassword").val() != null && $("#inputPassword").val() != "") {
@@ -205,8 +213,8 @@
 		    </a>
 		    
         <ul class="dropdown-menu dropdown-menu-right">
-          <li id="newStoryPage"><a href="newStory.html">Add New Story</a></li>
-          <li id="viewProfile"><a href="profile">View Profile</a></li>
+          <li id="newStoryPage"><a href="#">Add New Story</a></li>
+          <li id="viewProfile"><a href="#">View Profile</a></li>
           <li id="logout"><a href="#">Log Out</a></li>
         </ul>
 		  </li>
