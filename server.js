@@ -251,8 +251,10 @@ app.post('/story/*', function (req, res)) {
   var content = story.chapter;
   var email = story.email;
 
+  res.redirect(__dirname + '/static_files/read.html');
+
   db.each("SELECT * from stories WHERE title=? AND chapter=? AND email=?",[title, chapter, email], function(err,row) {
-    res.send
+    res.send(row);
   }
 }
 
