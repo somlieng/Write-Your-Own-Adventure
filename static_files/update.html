@@ -28,8 +28,8 @@
 				console.log(emailName);
 				var $inputEmail = $('#inputEmail');
 
-				if(emailName !=null){
-					$inputEmail.html(emailName);
+				if(localStorage.getItem("email") !=null){
+					$('#inputEmail').html(localStorage.getItem("email"));
 				}
 
 				
@@ -85,6 +85,7 @@
 	    });
 	  });
 	});
+	});
 
 	</script>
 
@@ -110,7 +111,7 @@
 		      <span class="glyphicon glyphicon-menu-hamburger"></span>
 		    </a>
 		    
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu dropdown-menu-right">
 		      	<li id="newStoryPage"><a href="newStory.html">Add New Story</a></li>
 	          <li id="updatePage"><a href="update.html">Update My Profile</a></li>
 	          <li id="logout"><a href="#">Logout</a></li>
@@ -126,7 +127,7 @@
           </ul>
         </nav>
         
-        <h3 class="text-muted">Update your Entire Profile</h3>
+        <h3 class="text-muted">Edit Profile</h3>
 
         <div>
 
@@ -140,20 +141,22 @@
 
 		        <br>
 		        <label for="inputuserName" class="sr-only">Update your username</label>
-		        <input type="text" id="inputuserName" class="form-control" placeholder="userName" required>
+		        <input type="text" id="inputuserName" class="form-control" placeholder="User Name" required>
 		        <br>
 
 		        <br>
 		        <label for="inputfirstName" class="sr-only">Update your first name</label>
-		        <input type="text" id="inputfirstName" class="form-control" placeholder="firstName" required>
+		        <input type="text" id="inputfirstName" class="form-control" placeholder="First Name" required>
 		        <br>
 
 		        <br>
 		        <label for="inputlastName" class="sr-only">Update your last name</label>
-		        <input type="text" id="inputlastName" class="form-control" placeholder="lastName" required>
+		        <input type="text" id="inputlastName" class="form-control" placeholder="Last Name" required>
 		        <br>
 
 		       <button class="btn btn-lg btn-primary btn-block" type="submit" id="updateButton">Update New Account</button>
+
+		       <br><br><br>
 
 		      <button class="btn btn-lg btn-primary btn-block" href="#" role="button" id="delete">Delete Account</button>
         	
