@@ -34,7 +34,10 @@
               console.log("You received some data!", data);
 
               for (var i = 0; i < 6; i++) {
-              $("#title" + (i+1)).html(data.stories[i].title + "<br>" + data.stories[i].content + "<br><br>");
+                $("#title" + (i+1)).html("<b>" + data.stories[i].title + "</b>, ");
+                $("#chapter" + (i+1)).html(data.stories[i].chapter + "<br>");
+                $("#blurp" + (i+1)).html(data.stories[i].content);
+                $("#author" + (i+1)).html(data.stories[i].email + "<br><br>");
               }
                
             },error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -53,27 +56,31 @@
             localStorage.removeItem("email");
             window.location.href = "login";
         });
-          $("#delete").click(function() {
-          $.ajax({
-            url: "delete/",
-            type: "POST",
-            dataType : "text", 
-            data : { email: localStorage.getItem("email") },
-            success: function( data ) {
-              console.log("You received some data!", data);
-               if (data == 'OK') {
-                localStorage.removeItem("email");
-                window.location.href = "login";
-              }  else {
-                $("#status").html("Error: could not delete user!");
-              }
-            },
+
+          $(".story").click(function(){
+            console.log("CLICKED!");
+            localStorage.setItem('title', $(this).find(".title").text());
+            localStorage.setItem('chapter', $(this).find(".chapter").text());
+            localStorage.setItem('author', $(this).find(".author").text());
+
+            console.log(localStorage.getItem("title"));
+            console.log(localStorage.getItem("chapter"));
+            console.log(localStorage.getItem("author"));
+
+            //window.location.href = "read.html";
           });
-            
-        });
+
         });
       </script>
 
+       <style>
+       .title{color:blue;}
+       .chapter{color:blue;}
+       .title:hover{color:purple;}
+       .chapter:hover{color:purple;}
+       .chapter:hover + .title{color:purple;}
+       .title:hover + .chapter{color:purple;}
+       </style>
 </head>
 
 <body>
@@ -128,29 +135,59 @@
         <div class="col-lg-6">
 
         <img id="image1" style="width: 500px; text-align:center"/>
-         <div id="title1">Story 1</div>
-         <div id="blurp1"></div>
+        <div class="story">
+         <div id="title1" class="title" style="float:left">Story 1</div>
+         <div id="chapter1" class="chapter"></div>
+         <div id="blurp1" class="content"></div>
+         <p style="float:left;"><i>Published by:</i>&nbsp;</p>
+         <div id="author1" class="author"></div>
+        </div>
 
-          <img id="image2" style="width: 500px; text-align:center" />
-          <div id="title2">Story 2</div>
-           <div id="blurp2"></div>
+        <img id="image2" style="width: 500px; text-align:center" />
+        <div class="story">
+          <div id="title2" class="title" style="float:left;">Story 2</div>
+          <div id="chapter2" class="chapter"></div>
+          <div id="blurp2" class="content"></div>
+          <p style="float:left;"><i>Published by:</i>&nbsp;</p>
+          <div id="author2" class="author"></div>
+        </div>
           
-           <img id="image3" style="width: 500px; text-align:center" />
-          <div id="title3">Story 3</div>
-           <div id="blurp3"></div>
+        <img id="image3" style="width: 500px; text-align:center" />
+        <div class="story">
+          <div id="title3" class="title" style="float:left;">Story 3</div>
+          <div id="chapter3" class="chapter"></div>
+          <div id="blurp3" class="content"></div>
+          <p style="float:left;"><i>Published by:</i>&nbsp;</p>
+          <div id="author3" class="author"></div>
+        </div>
           
 
         <img id="image4" style="width: 500px; text-align:center" />
-          <div id="title4">Story 4</div>
-           <div id="blurp4"></div>
+        <div class="story">
+          <div id="title4" class="title" style="float:left;">Story 4</div>
+          <div id="chapter4" class="chapter"></div>
+          <div id="blurp4" class="content"></div>
+          <p style="float:left;"><i>Published by:</i>&nbsp;</p>
+          <div id="author4" class="author"></div>
+        </div>
 
-          <img id="image5" style="width: 500px; text-align:center" />
-          <div id="title5">Story 5</div>
-           <div id="blurp5"></div>
+        <img id="image5" style="width: 500px; text-align:center" />
+        <div class="story">
+          <div id="title5" class="title" style="float:left;">Story 5</div>
+          <div id="chapter5" class="chapter"></div>
+          <div id="blurp5" class="content"></div>
+          <p style="float:left;"><i>Published by:</i>&nbsp;</p>
+          <div id="author5" class="author"></div>
+        </div>
 
          <img id="image6" style="width: 500px; text-align:center" />
-          <div id="title6">Story 6</div>
-           <div id="blurp6"></div>        
+         <div class="story">
+          <div id="title6" class="title" style="float:left;">Story 6</div>
+          <div id="chapter6" class="chapter"></div>
+          <div id="blurp6" class="content"></div>
+          <p style="float:left;"><i>Published by:</i>&nbsp;</p>
+          <div id="author6" class="author"></div>
+        </div>        
 
            </div>
       </div>
