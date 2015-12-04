@@ -283,13 +283,9 @@ app.post('/updateFirstname', function (req, res) {
 
 });
 
-<<<<<<< HEAD
+
 app.post('/updateLastname', function (req, res) {
   var user = req.body;
-=======
-app.post('/story/*', function (req, res) {
-  var story = req.body;
->>>>>>> origin/master
 
   var email = user.email;
   var lastname = user.lastname;
@@ -297,7 +293,6 @@ app.post('/story/*', function (req, res) {
   console.log(email);
   console.log(lastname);
 
-<<<<<<< HEAD
   if (!lastname) {
     res.send("INCOMPLETE FIELDS");
     console.log('invalid in users');
@@ -348,12 +343,7 @@ app.get('/profile', function(req, res) {
 //     res.send(row);
 //   }
 // });
-=======
-  db.each("SELECT * from stories WHERE title=? AND chapter=? AND email=?",[title, chapter, email], function(err,row) {
-    res.send(row);
-  });
-});
->>>>>>> origin/master
+
 
 app.get('/topstories', function (req, res) {
 
