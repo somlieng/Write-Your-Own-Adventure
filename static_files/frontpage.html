@@ -58,14 +58,9 @@
         });
 
           $(".story").click(function(){
-            console.log("CLICKED!");
             localStorage.setItem('title', $(this).find(".title").text());
             localStorage.setItem('chapter', $(this).find(".chapter").text());
             localStorage.setItem('author', $(this).find(".author").text());
-
-            console.log(localStorage.getItem("title"));
-            console.log(localStorage.getItem("chapter"));
-            console.log(localStorage.getItem("author"));
 
             window.location.href = "read.html";
           });
@@ -76,9 +71,9 @@
        <style>.story:hover{color:grey;}</style>
 </head>
 
-<body>
+<body background="trees.jpg">
 
-    <div class="container">
+    <div class="container" style="background-color:white;">
 
     
 
@@ -86,9 +81,6 @@
      <nav>
           <ul class="nav nav-pills pull-right">
            
-            <li role="presentation" id="homeLink"><a href="#">Home</a></li>
-
-            
             <li role="presentation" class="dropdown">
        
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -126,9 +118,8 @@
       <div class="latest"><center><h3>Latest Stories</h3></center></div>
 
       <div class="row marketing">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
 
-        <img id="image1" style="width: 500px; text-align:center"/>
         <div class="story">
          <div id="title1" class="title" style="float:left">Story 1</div>
          <div style="float:left">,&nbsp;</div>
@@ -138,7 +129,6 @@
          <div id="author1" class="author"></div>
         </div>
 
-        <img id="image2" style="width: 500px; text-align:center" />
         <div class="story">
           <div id="title2" class="title" style="float:left;">Story 2</div>
           <div style="float:left">,&nbsp;</div>
@@ -148,7 +138,6 @@
           <div id="author2" class="author"></div>
         </div>
           
-        <img id="image3" style="width: 500px; text-align:center" />
         <div class="story">
           <div id="title3" class="title" style="float:left;">Story 3</div>
           <div style="float:left">,&nbsp;</div>
@@ -159,7 +148,6 @@
         </div>
           
 
-        <img id="image4" style="width: 500px; text-align:center" />
         <div class="story">
           <div id="title4" class="title" style="float:left;">Story 4</div>
           <div style="float:left">,&nbsp;</div>
@@ -169,7 +157,6 @@
           <div id="author4" class="author"></div>
         </div>
 
-        <img id="image5" style="width: 500px; text-align:center" />
         <div class="story">
           <div id="title5" class="title" style="float:left;">Story 5</div>
           <div style="float:left">,&nbsp;</div>
@@ -179,7 +166,6 @@
           <div id="author5" class="author"></div>
         </div>
 
-         <img id="image6" style="width: 500px; text-align:center" />
          <div class="story">
           <div id="title6" class="title" style="float:left;">Story 6</div>
           <div style="float:left">,&nbsp;</div>
