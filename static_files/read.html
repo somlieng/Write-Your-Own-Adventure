@@ -32,23 +32,17 @@
             }
 
             $.ajax({
-              url: "users/",
+              url: "story/",
               type: "POST",
-              dataType : "text", // this URL returns a plain text string, not JSON
-              data : { password: $("#inputPassword").val(),
-                       email: $("#inputEmail").val(),
-                       username: $("#inputuserName").val(),
-                       firstname: $("#inputfirstName").val(),
-                       lastname: $("#inputlastName").val()
+              dataType : "json", // this URL returns a plain text string, not JSON
+              data : { title: localStorage.getItem("title"),
+                       chapter: localStorage.getItem("chapter"),
+                       email: localStorage.getItem("author")
                      },
               success: function( data ) {
-                localStorage.setItem("email",storeEmail.value);
-                console.log("You received some data!", data);
-                if (data == 'OK') {
-                  window.location.href = "frontpage";
-                } else {
-                  $("#status").html("Error: could not create a new user!");
-                }
+                $('#title').html(data.story[0].title);
+                $('#chapter').html(data.story[0].chapter);
+                $('#author').html(data.story[0].author);
               },
             });
 
