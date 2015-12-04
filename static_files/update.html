@@ -65,30 +65,119 @@
 		});
 
 
-	  $("#updateButton").click(function() {
-	    $.ajax({
-	      // The URL for the request -- note the simple REST API!
-	      // all URLs are relative to http://localhost:3000/
-	      url: "users/",
-	      type: "POST",
-	      dataType : "text", // this URL returns a plain text string, not JSON
-	      data : { password: $("#inputPassword").val(),
-	               email: $("#inputEmail").val(),
-	               username: $("#inputuserName").val(),
-	               firstname: $("#inputfirstName").val(),
-	               lastname: $("#inputlastName").val()
-	             },
-	      success: function( data ) {
-	      	localStorage.setItem("email",storeEmail.value);
-	        console.log("You received some data!", data);
-	        if (data == 'OK') {
-	          window.location.href = "frontpage";
-	        } else {
-	          $("#status").html("Error: could not create a new user!");
-	        }
-	      },
-	    });
+	  $("#updatePassword").click(function() {
+	  	if ($("#inputPassword").val() != null && $("#inputPassword").val() != "") {
+	  		$("#status").html("Update Successful!");
+		    $.ajax({
+		      // The URL for the request -- note the simple REST API!
+		      // all URLs are relative to http://localhost:3000/
+		      url: "updatePassword/",
+		      type: "POST",
+		      dataType : "text", // this URL returns a plain text string, not JSON
+		      data : {  email: localStorage.getItem("email"),
+		      			password: $("#inputPassword").val()
+		             },
+		      success: function( data ) {
+
+		        if (data == 'OK') {
+
+		        } else {
+		          $("#status").html("Error: could not update profile!");
+		        }
+		      },
+		    });
+		}
+		else {
+			$("#status").html("Update field cannot be empty!");
+		}
 	  });
+
+	  $("#updateUserName").click(function() {
+	  	if ($("#inputuserName").val() != null && $("#inputuserName").val() != "") {
+	  		$("#status").html("Update Successful!");
+		    $.ajax({
+		      // The URL for the request -- note the simple REST API!
+		      // all URLs are relative to http://localhost:3000/
+		      url: "updateUsername/",
+		      type: "POST",
+		      dataType : "text", // this URL returns a plain text string, not JSON
+		      data : {  email: localStorage.getItem("email"),
+		      			username: $("#inputuserName").val()
+		             },
+		      success: function( data ) {
+		        if (data == 'OK') {
+
+		        } else {
+		          $("#status").html("Error: could not update profile!");
+		        }
+		      },
+		    });
+		}
+		else {
+			$("#status").html("Update field cannot be empty!");
+		}
+	  });
+
+	  $("#updateFirstName").click(function() {
+	  	if ($("#inputfirstName").val() != null && $("#inputfirstName").val() != "") {
+	  		$("#status").html("Update Successful!");
+		    $.ajax({
+		      // The URL for the request -- note the simple REST API!
+		      // all URLs are relative to http://localhost:3000/
+		      url: "updateFirstname/",
+		      type: "POST",
+		      dataType : "text", // this URL returns a plain text string, not JSON
+		      data : {  email: localStorage.getItem("email"),
+		      			firstname: $("#inputfirstName").val()
+		             },
+		      success: function( data ) {
+		      	localStorage.setItem("email",storeEmail.value);
+		        console.log("You received some data!", data);
+
+
+		        if (data == 'OK') {
+
+		        } else {
+		          $("#status").html("Error: could not update profile!");
+		        }
+		      },
+		    });
+		}
+		else {
+			$("#status").html("Update field cannot be empty!");
+		}
+	  });
+
+	  $("#updateLastName").click(function() {
+	  	if ($("#inputlastName").val() != null && $("#inputlastName").val() != "") {
+	  		$("#status").html("Update Successful!");
+		    $.ajax({
+		      // The URL for the request -- note the simple REST API!
+		      // all URLs are relative to http://localhost:3000/
+		      url: "updateLastName/",
+		      type: "POST",
+		      dataType : "text", // this URL returns a plain text string, not JSON
+		      data : {  email: localStorage.getItem("email"),
+		      			lastname: $("#inputlastName").val()
+		             },
+		      success: function( data ) {
+		      	localStorage.setItem("email",storeEmail.value);
+		        console.log("You received some data!", data);
+
+
+		        if (data == 'OK') {
+
+		        } else {
+		          $("#status").html("Error: could not update profile!");
+		        }
+		      },
+		    });
+		}
+		else {
+			$("#status").html("Update field cannot be empty!");
+		}
+	  });
+
 	});
 
 	</script>
@@ -132,6 +221,8 @@
         </nav>
         
         <h3 class="text-muted">Edit Profile</h3>
+
+        <div id="status" style="color:red;"> </div>
 
         <div>
 

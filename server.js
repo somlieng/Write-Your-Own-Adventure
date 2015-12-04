@@ -205,58 +205,143 @@ app.post('/login/*', function (req, res) {
 
 });
 
-app.post('/update/*', function (req, res) {
+app.post('/updatePassword', function (req, res) {
   var user = req.body;
 
   var email = user.email;
   var password = user.password;
-  var username = user.username;
-  var firstname = user.firstname;
-  var lastname = user.lastname;
-
-  var alreadyFound = false;
 
   console.log(email);
   console.log(password);
-  console.log(username);
-  console.log(firstname);
-  console.log(lastname);
 
-
-  // must have a name!
-  if (!email || !password || !username || !firstname || !lastname) {
+  if (!password) {
     res.send("INCOMPLETE FIELDS");
     console.log('invalid in users');
-    return; // return early!
+    return;
   }
 
   else {
-    db.each("SELECT * from users WHERE email=?",[email], function(err,row) {
-        var stmt = db.prepare("UPDATE users VALUES(?,?,?,?,?)");
-        stmt.run(email, password, username, firstname, lastname);
-        console.log('user inserted into db');
-        stmt.finalize();
+    var stmt = db.prepare("UPDATE users SET password=? WHERE email=?");
+    stmt.run(password, email);
+    console.log('password successfully updated');
+    stmt.finalize();
 
-
-      res.send("OK");
-    });
+    res.send('OK');
   }
 
 });
 
-app.post('/story/*', function (req, res)) {
-  var story = req.body;
+app.post('/updateUsername', function (req, res) {
+  var user = req.body;
 
-  var title = story.title;
-  var content = story.chapter;
-  var email = story.email;
+  var email = user.email;
+  var username = user.username;
 
-  res.redirect(__dirname + '/static_files/read.html');
+  console.log(email);
+  console.log(username);
 
-  db.each("SELECT * from stories WHERE title=? AND chapter=? AND email=?",[title, chapter, email], function(err,row) {
-    res.send(row);
+  if (!username) {
+    res.send("INCOMPLETE FIELDS");
+    console.log('invalid in users');
+    return;
   }
-}
+
+  else {
+    var stmt = db.prepare("UPDATE users SET username=? WHERE email=?");
+    stmt.run(username, email);
+    console.log('username successfully updated');
+    stmt.finalize();
+
+    res.send('OK');
+  }
+
+});
+
+app.post('/updateFirstname', function (req, res) {
+  var user = req.body;
+
+  var email = user.email;
+  var firstname = user.firstname;
+
+  console.log(email);
+  console.log(firstname);
+
+  if (!firstname) {
+    res.send("INCOMPLETE FIELDS");
+    console.log('invalid in users');
+    return;
+  }
+
+  else {
+    var stmt = db.prepare("UPDATE users SET firstname=? WHERE email=?");
+    stmt.run(firstname, email);
+    console.log('firstname successfully updated');
+    stmt.finalize();
+
+    res.send('OK');
+  }
+
+});
+
+app.post('/updateLastname', function (req, res) {
+  var user = req.body;
+
+  var email = user.email;
+  var lastname = user.lastname;
+
+  console.log(email);
+  console.log(lastname);
+
+  if (!lastname) {
+    res.send("INCOMPLETE FIELDS");
+    console.log('invalid in users');
+    return;
+  }
+
+  else {
+    var stmt = db.prepare("UPDATE users SET lastname=? WHERE email=?");
+    stmt.run(lastname, email);
+    console.log('lastname successfully updated');
+    stmt.finalize();
+
+    res.send('OK');
+  }
+
+});
+
+app.post('/getProfile', function (req, res) {
+
+  var email = req.body.email;
+
+  db.all("SELECT * FROM users WHERE email=?", [email], function(err,rows) {
+    res.send({"user":[
+      {email: rows[0].email, username: rows[0].username, firstname: rows[0].firstname, lastname: rows[0].lastname}
+ 
+    ]});
+  });
+});
+
+app.get('/profile', function(req, res) {
+
+  console.log('GET /profile');
+
+  res.sendFile(__dirname + '/static_files/profile.html');
+
+});
+
+// app.post('/story/*', function (req, res) {
+//   var story = req.body;
+
+//   var title = story.title;
+//   var content = story.chapter;
+//   var email = story.email;
+
+//   res.redirect(__dirname + '/static_files/read.html');
+
+//   db.each("SELECT * from stories WHERE title=? AND chapter=? AND email=?",[title, chapter, email], function(err,row) {
+//     res.send(row);
+//   }
+// });
 
 app.get('/topstories', function (req, res) {
 

@@ -3,25 +3,75 @@
 <head>
 
 <meta charset="utf-8">
-   		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<!-- Enable Mobile view with viewport meta tag -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Enable Mobile view with viewport meta tag -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- Title for the page -->
-		<title>StoryTree Add New Stories</title>
+  <!-- Title for the page -->
+  <title>View Profile</title>
 
-		<!-- Bootstrap Framework Dependencies -->
-		
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Bootstrap Framework Dependencies -->
+  
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-		<!-- jQuery library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-		<!-- Latest compiled JavaScript -->
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-			 
+  <script type="text/javascript">
+    $(document).ready(function() {
+        console.log("here");
+        $.ajax({
+
+          // The URL for the request -- note the simple REST API!
+          // all URLs are relative to http://localhost:3000/
+          url: "getProfile/",
+          type: "POST",
+          dataType : "json", // this URL returns a plain text string, not JSON
+          data : {  email: localStorage.getItem("email")
+                 },
+          success: function( data ) {
+
+            console.log(data.user[0].email);
+
+            $('#email').html(data.user[0].email);
+            $('#username').html(data.user[0].username);
+            $('#firstname').html(data.user[0].firstname);
+            $('#lastname').html(data.user[0].lastname);
+
+
+            } 
+          });
+      
+      var emailName = localStorage.getItem("email");
+      console.log(emailName);
+      var $inputEmail = $('#inputEmail');
+
+      if(localStorage.getItem("email") !=null){
+        $('#inputEmail').html(localStorage.getItem("email"));
+      }
+
+        
+            $("#logout").click(function() {
+              localStorage.removeItem("email");
+              window.location.href = "login";
+          });
+
+
+
+    $("#homeLink").click(function() {
+      window.location.href = "frontpage";
+    });
+
+
+  });
+
+  </script>
+
+       
 </head>
 
 <body>
@@ -31,7 +81,7 @@
     
 
       <div class="header clearfix">
-     <nav>
+        <nav>
           <ul class="nav nav-pills pull-right">
            
             <li role="presentation" id="homeLink"><a href="#">Home</a></li>
@@ -43,10 +93,10 @@
           <span class="glyphicon glyphicon-menu-hamburger"></span>
         </a>
         
-        <ul class="dropdown-menu">
-           <li id="newStoryPage"><a href="newStory.html">Add New Story</a></li>
-          <li id="updatePage"><a href="update.html">Update My Profile</a></li>
-          <li id="logout"><a href="#">Logout</a></li>
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li id="newStoryPage"><a href="newStory.html">Add New Story</a></li>
+            <li id="updatePage"><a href="update.html">Update My Profile</a></li>
+            <li id="logout"><a href="#">Logout</a></li>
         </ul>
       </li>
 
@@ -58,14 +108,40 @@
 
           </ul>
         </nav>
-        <h3 class="text-muted">Add New Story</h3>
+        
+        <h3 class="text-muted">View Profile</h3>
+
+
+        <div>
+
+            
+            <h2 id="inputEmail">email</h2> 
+            
+            <br>
+            <p> Email: </p>
+            <p id="email"> </p>
+            <br>
+
+            <p> Username: </p>
+            <p id="username"> </p>
+            <br>
+
+            <p> First Name: </p>
+            <p id="firstname"> </p>
+            <br>
+
+            <p> Last Name: </p>
+            <p id="lastname"> </p>
+            <br>
+
+ 
 
       </div>
 
 
-      <footer class="footer">
+<!--       <footer class="footer">
         <p>&copy; 2015 Company, Inc.</p>
-      </footer>
+      </footer> -->
 
     </div> <!-- /container -->
 
@@ -74,5 +150,6 @@
 
 </body>
 </html>
-	
+  
+  
 	
