@@ -388,9 +388,13 @@ app.get('/topstories', function (req, res) {
 
 });
 
-app.get('/childstories', function (req, res) {
+app.post('/childstories', function (req, res) {
 
-  db.all("SELECT * FROM stories WHERE parent=?", "", function(err,rows) {
+  var story = req.body;
+  var parent = story.parent;
+  var title = story.title;
+
+  db.all("SELECT * FROM stories WHERE parent=? AND title=?", [parent, title], function(err,rows) {
 
     var jsonData = {"stories":[]};
 
@@ -412,6 +416,36 @@ app.post('/addStory/*', function (req, res) {
   var content =story.content;
   var title = story.title;
   var chapter = story.chapter;
+
+  if (parent == "") {
+    db.all("SELECT * from users WHERE title=?",[title], function(err,rows) {
+      if (rows == undefined || rows.length == 0) {
+        var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+        stmt.run(email, parent, content, title, chapter);
+        stmt.finalize();
+        console.log("Added: " + email + " " + parent + " " + content + " " + title + " " + chapter);
+        res.send('OK');
+
+      }
+      else {
+        res.send('TITLE_EXISTS');
+      }
+  }
+  else {
+    db.all("SELECT * from users WHERE title=? AND chapter=?", [title, chapter], function(err,rows) {
+      if (rows == undefined || rows.length == 0) {
+        var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+        stmt.run(email, parent, content, title, chapter);
+        stmt.finalize();
+        console.log("Added: " + email + " " + parent + " " + content + " " + title + " " + chapter);
+        res.send('OK');
+      }
+      else {
+        res.send('CHAPTER_EXISTS');
+      }
+    })
+
+  }
 
   var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
   stmt.run(email, parent, content, title, chapter);
