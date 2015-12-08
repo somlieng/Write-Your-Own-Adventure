@@ -58,26 +58,23 @@ db.serialize(function() {
       "Tis some visitor, I muttered, tapping at my chamber door-  <br>" +
       "Only this, and nothing more."
 
-    stmt.run("poe@gmail.com", "root", s, "The Raven", "Chapter 1");
+    stmt.run("poe@gmail.com", "", s, "The Raven", "Chapter 1");
     stmt.finalize();
 
-    var t = "A Child was standing on a street-corner. He leaned with one shoulder against a high board-fence and swayed the other to and fro, the while kicking carelessly at the gravel. Sunshine beat upon the cobbles, and a lazy summer wind raised yellow dust which trailed in clouds down the avenue. Clattering trucks moved with indistinctness through it. The child stood dreamily gazing. After a time, a little dark-brown dog came trotting with an intent air down the sidewalk. A short rope was dragging from his neck. Occasionally he trod upon the end of it and stumbled."
+    var t = "A Child was standing on a street-corner. He leaned with " +
+    "one shoulder against a high board-fence and swayed the other to and " +
+    "fro, the while kicking carelessly at the gravel. Sunshine beat upon " +
+    "the cobbles, and a lazy summer wind raised yellow dust which trailed " +
+    "in clouds down the avenue. Clattering trucks moved with indistinctness " +
+    "through it. The child stood dreamily gazing. After a time, a little " +
+    "dark-brown dog came trotting with an intent air down the sidewalk. " +
+    "A short rope was dragging from his neck. Occasionally he trod upon the "+
+    " end of it and stumbled."
     var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-    stmt.run("crane@yahoo.com", "root", t, "A Dark Brown Dog", "Chapter 1");
+    stmt.run("crane@yahoo.com", "", t, "A Dark Brown Dog", "Chapter 1");
     stmt.finalize();
-    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-    stmt.run("email3", "parent3", "content3", "title3", "chapter3");
-    stmt.finalize();
-    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-    stmt.run("email4", "parent4", "content4", "title4", "chapter4");
-    stmt.finalize();
-    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-    stmt.run("email5", "parent5", "content5", "title5", "chapter5");
-    stmt.finalize();
-    var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-    stmt.run("email6", "parent6", "content6", "title6", "chapter6");
-    stmt.finalize();
-    console.log("Add six items to stories");
+
+    console.log("Add two items to stories");
   }
 
 });
@@ -377,19 +374,64 @@ app.post('/story/*', function (req, res) {
 
 app.get('/topstories', function (req, res) {
 
-  db.all("SELECT * FROM stories LIMIT 6", function(err,rows) {
-    res.send({"stories":[
-  {email: rows[0].email, parent: rows[0].parent, content: rows[0].content, title: rows[0].title, chapter: rows[0].chapter},
-  {email: rows[1].email, parent: rows[1].parent, content: rows[1].content, title: rows[1].title, chapter: rows[1].chapter},
-  {email: rows[2].email, parent: rows[2].parent, content: rows[2].content, title: rows[2].title, chapter: rows[2].chapter},
-  {email: rows[3].email, parent: rows[3].parent, content: rows[3].content, title: rows[3].title, chapter: rows[3].chapter},
-  {email: rows[4].email, parent: rows[4].parent, content: rows[4].content, title: rows[4].title, chapter: rows[4].chapter},
-  {email: rows[5].email, parent: rows[5].parent, content: rows[5].content, title: rows[5].title, chapter: rows[5].chapter}
-]});
+  db.all("SELECT * FROM stories WHERE parent=?", "", function(err,rows) {
+
+    var jsonData = {"stories":[]};
+
+    for (var i = 0; i < rows.length; i++) {
+      var obj = {email: rows[i].email, parent: rows[i].parent, content: rows[i].content, title: rows[i].title, chapter: rows[i].chapter};
+      jsonData.stories.push(obj);
+    }
+    res.send(jsonData);
+
+    });
+
+});
+
+app.get('/childstories', function (req, res) {
+
+  db.all("SELECT * FROM stories WHERE parent=?", "", function(err,rows) {
+
+    var jsonData = {"stories":[]};
+
+    for (var i = 0; i < rows.length; i++) {
+      var obj = {email: rows[i].email, parent: rows[i].parent, content: rows[i].content, title: rows[i].title, chapter: rows[i].chapter};
+      jsonData.stories.push(obj);
+    }
+    res.send(jsonData);
+
+    });
+
+});
+
+app.post('/addStory/*', function (req, res) {
+  var story = req.body;
+
+  var email = story.email;
+  var parent = story.parent;
+  var content =story.content;
+  var title = story.title;
+  var chapter = story.chapter;
+
+  var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+  stmt.run(email, parent, content, title, chapter);
+  stmt.finalize();
+
+  console.log("Added: " + email + " " + parent + " " + content + " " + title + " " + chapter);
+
+  res.send('OK');
+});
+
+
+app.post('/parent/*', function (req, res) {
+  var story = req.body;
+
+  var title = story.title;
+  var chapter = story.parent;
+
+  db.all("SELECT * from stories WHERE title=\"" + title + "\" AND chapter=\"" + chapter + "\"", function(err,row) {
+    res.send({"story":[{email: row[0].email, parent: row[0].parent, content: row[0].content, title: row[0].title, chapter: row[0].chapter}]});
   });
-
-  
-
 });
 
 

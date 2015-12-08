@@ -21,8 +21,9 @@
 		<!-- Latest compiled JavaScript -->
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-			 <script type="text/javascript">
+       <script type="text/javascript">
         var parent;
+        var title;
         $(document).ready(function() {
            $("#loginPage").click(function() {
               window.location.href = "login";
@@ -41,8 +42,9 @@
                        email: localStorage.getItem("author")
                      },
               success: function( data ) {
+                title = data.story[0].title;
                 console.log(data.story[0].parent);
-                $('#title').html(data.story[0].title + " - " + data.story[0].chapter);
+                $('#title').html(title + " - " + data.story[0].chapter);
                 $('#story').html(data.story[0].content);
                 $('#author').html(data.story[0].email);
                 parent = data.story[0].parent;
@@ -69,7 +71,50 @@
             $("#updatePage").click(function() {
               window.location.href = "update";
             });
-        });
+
+            $("#parentButton").click(function() {
+              if(parent != ""){
+                $.ajax({
+                  url: "parent/",
+                  type: "POST",
+                  dataType : "json", // this URL returns a plain text string, not JSON
+                  data : { title: title,
+                           parent: parent
+                         },
+                  success: function( data ) {
+                    localStorage.setItem('chapter', parent);
+                    localStorage.setItem('author', data.story[0].email);
+  
+                    window.location.href = "read";
+                  },
+                });
+              }
+              else{
+                window.location.href = "frontpage";
+              }
+            });
+
+            $("#branchButton").click(function() {
+              $.ajax({
+                  url: "addStory/",
+                  type: "POST",
+                  dataType : "text", 
+                  data : { email: localStorage.getItem("email"),
+                           parent: localStorage.getItem("chapter"),
+                           content: document.getElementById('inputStory').value,
+                           title: localStorage.getItem("title"),
+                           chapter: document.getElementById('inputTitle').value
+                         },
+                  success: function( data ) {
+                    localStorage.setItem('chapter', document.getElementById('inputTitle').value);
+                    localStorage.setItem('author', localStorage.getItem("email"));
+  
+                    window.location.href = "read";
+                  },
+              });
+            });
+
+        });//closing of document.ready
 
 
       </script>
