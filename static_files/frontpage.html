@@ -32,13 +32,35 @@
             dataType : "json", 
             success: function( data ) {
               console.log("You received some data!", data);
+              
+              var concatString = "";
 
-              for (var i = 0; i < 6; i++) {
-                $("#title" + (i+1)).html("<b>" + data.stories[i].title + "</b>");
-                $("#chapter" + (i+1)).html(data.stories[i].chapter + "<br>");
-                $("#blurp" + (i+1)).html(data.stories[i].content);
-                $("#author" + (i+1)).html(data.stories[i].email + "<br><br>");
+              for (var i = 0; i < data.stories.length; i++) {
+                concatString += "<div class='story'>" +
+                 "<div id='title"+i +"' class='title' style='float:left'>" +
+                 "<b>" + data.stories[i].title + "</b></div>" +
+                 "<div style='float:left'>,&nbsp;</div>"+
+                 "<div id='chapter"+i+"' class='chapter'>" +
+                 data.stories[i].chapter + "<br></div>"+
+                 "<div id='blurp"+i+"' class='content'>" +
+                 data.stories[i].content + "</div>"+
+                 "<p style='float:left;'><i>Published by:</i>&nbsp;</p>"+
+                 "<div id='author"+i+"' class='author'>" +
+                 data.stories[i].email + "<br><br></div>"+
+                 "</div>";
               }
+
+              document.getElementById("storyDiv").innerHTML = concatString;
+
+              $(".story").click(function(){
+                localStorage.setItem('title', $(this).find(".title").text());
+                localStorage.setItem('chapter', $(this).find(".chapter").text());
+                localStorage.setItem('author', $(this).find(".author").text());
+
+                 window.location.href = "read";
+              });
+
+
                
             },error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
@@ -57,13 +79,7 @@
             window.location.href = "login";
         });
 
-          $(".story").click(function(){
-            localStorage.setItem('title', $(this).find(".title").text());
-            localStorage.setItem('chapter', $(this).find(".chapter").text());
-            localStorage.setItem('author', $(this).find(".author").text());
 
-            window.location.href = "read";
-          });
 
           $("#newStoryPage").click(function() {
             window.location.href = "new";
@@ -130,14 +146,14 @@
       <div class="latest"><center><h3>Latest Stories</h3></center></div>
 
       <div class="row marketing">
-        <div class="col-lg-12">
+        <div id="storyDiv" class="col-lg-12">
 
-        <div class="story">
-         <div id="title1" class="title" style="float:left">Story 1</div>
+<!--         <div class='story'>
+         <div id='title1' class="title" style="float:left">Story 1</div>
          <div style="float:left">,&nbsp;</div>
          <div id="chapter1" class="chapter"></div>
          <div id="blurp1" class="content"></div>
-         <p style="float:left;"><i>Published by:</i>&nbsp;</p>
+         <p style='float:left;'><i>Published by:</i>&nbsp;</p>
          <div id="author1" class="author"></div>
         </div>
 
@@ -178,16 +194,16 @@
           <div id="author5" class="author"></div>
         </div>
 
-         <div class="story">
+        <div class="story">
           <div id="title6" class="title" style="float:left;">Story 6</div>
           <div style="float:left">,&nbsp;</div>
           <div id="chapter6" class="chapter"></div>
           <div id="blurp6" class="content"></div>
           <p style="float:left;"><i>Published by:</i>&nbsp;</p>
           <div id="author6" class="author"></div>
-        </div>        
+        </div> -->
 
-           </div>
+      </div>
       </div>
 
       <footer class="footer">
