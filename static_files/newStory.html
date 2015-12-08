@@ -51,6 +51,29 @@
           },
         });
       });
+
+          $("#createButton").click(function() {
+              $.ajax({
+                  url: "addStory/",
+                  type: "POST",
+                  dataType : "text", 
+                  data : { email: localStorage.getItem("email"),
+                           parent: "",
+                           content: document.getElementById('inputStory').value,
+                           title: document.getElementById('inputTitle').value,
+                           chapter: document.getElementById('inputChapter').value
+                         },
+                  success: function( data ) {
+                    localStorage.setItem('title', document.getElementById('inputTitle').value);
+                    localStorage.setItem('chapter', document.getElementById('inputChapter').value);
+                    localStorage.setItem('author', localStorage.getItem("email"));
+  
+                    window.location.href = "read";
+                  },
+              });
+            });
+
+
           $("#homeLink").click(function() {
               window.location.href = "frontpage";
           });
@@ -113,8 +136,8 @@
         <label for="inputTitle">What is your Story's title?</label>
         <input type="text" class="form-control" id="inputTitle" placeholder="Title">
 
-        <label for="inputSummary" >What is your Chapter Name?</label>
-        <textarea class="form-control" id="inputSummary" placeholder="Introduction"></textarea>
+        <label for="inputChapter" >What is your Chapter Name?</label>
+        <textarea class="form-control" id="inputChapter" placeholder="ex. Introduction"></textarea>
 
        
         <label for="inputStory" >Write your Story below:</label>
