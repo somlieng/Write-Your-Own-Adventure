@@ -417,35 +417,40 @@ app.post('/addStory/*', function (req, res) {
   var title = story.title;
   var chapter = story.chapter;
 
-  if (parent == "") {
-    db.all("SELECT * from stories WHERE title=?",[title], function(err,rows) {
-      if (rows == undefined || rows.length == 0) {
-        var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-        stmt.run(email, parent, content, title, chapter);
-        stmt.finalize();
-        console.log("Added: " + email + " " + parent + " " + content + " " + title + " " + chapter);
-        res.send('OK');
+  if (content != "" && title != "" && chapter != "" && content != null && title != null && chapter != null) {
+    if (parent == "") {
+      db.all("SELECT * from stories WHERE title=?",[title], function(err,rows) {
+        if (rows == undefined || rows.length == 0) {
+          var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+          stmt.run(email, parent, content, title, chapter);
+          stmt.finalize();
+          console.log("Added: " + email + " " + parent + " " + content + " " + title + " " + chapter);
+          res.send('OK');
 
-      }
-      else {
-        res.send('TITLE_EXISTS');
-      }
-    });
+        }
+        else {
+          res.send('TITLE_EXISTS');
+        }
+      });
+    }
+    else {
+      db.all("SELECT * from stories WHERE title=? AND chapter=?", [title, chapter], function(err,rows) {
+        if (rows == undefined || rows.length == 0) {
+          var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
+          stmt.run(email, parent, content, title, chapter);
+          stmt.finalize();
+          console.log("Added: " + email + " " + parent + " " + content + " " + title + " " + chapter);
+          res.send('OK');
+        }
+        else {
+          res.send('CHAPTER_EXISTS');
+        }
+      });
+
+    }
   }
   else {
-    db.all("SELECT * from stories WHERE title=? AND chapter=?", [title, chapter], function(err,rows) {
-      if (rows == undefined || rows.length == 0) {
-        var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-        stmt.run(email, parent, content, title, chapter);
-        stmt.finalize();
-        console.log("Added: " + email + " " + parent + " " + content + " " + title + " " + chapter);
-        res.send('OK');
-      }
-      else {
-        res.send('CHAPTER_EXISTS');
-      }
-    });
-
+    res.send('NULL_CONTENT');
   }
 
 });

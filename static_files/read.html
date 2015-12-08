@@ -158,8 +158,11 @@
     
                       window.location.href = "read";
                     }
+                    else if (data == 'NULL_CONTENT'){
+                       $('#statusDiv').html("Please Complete All Fields");
+                    }
                     else {
-                       $('#statusDiv').html("Story Already Has Chapter With This Name");
+                      $('#statusDiv').html("Story Already Has Chapter With This Name");
                     }
                   },
               });

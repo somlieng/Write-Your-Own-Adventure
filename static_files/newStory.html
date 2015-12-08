@@ -71,6 +71,9 @@
     
                       window.location.href = "read";
                     }
+                    else if (data == 'NULL_CONTENT') {
+                       $('#statusDiv').html("Please Complete All Fields");
+                    }
                     else {
                       $('#statusDiv').html("Story With This Title Already Exists");
                     }
