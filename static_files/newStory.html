@@ -44,7 +44,7 @@
             localStorage.setItem("email",storeEmail.value);
             console.log("You received some data!", data);
             if (data == 'OK') {
-              window.location.href = "frontpage.html";
+              window.location.href = "frontpage";
             } else {
               $("#status").html("Error: could not create a new user!");
             }
@@ -64,11 +64,16 @@
                            chapter: document.getElementById('inputChapter').value
                          },
                   success: function( data ) {
-                    localStorage.setItem('title', document.getElementById('inputTitle').value);
-                    localStorage.setItem('chapter', document.getElementById('inputChapter').value);
-                    localStorage.setItem('author', localStorage.getItem("email"));
-  
-                    window.location.href = "read";
+                    if (data == 'OK') {
+                      localStorage.setItem('title', document.getElementById('inputTitle').value);
+                      localStorage.setItem('chapter', document.getElementById('inputChapter').value);
+                      localStorage.setItem('author', localStorage.getItem("email"));
+    
+                      window.location.href = "read";
+                    }
+                    else {
+                      $('#statusDiv').html("Story With This Title Already Exists");
+                    }
                   },
               });
             });
@@ -144,6 +149,8 @@
         <textarea class="form-control" rows="12" id="inputStory"></textarea>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit" id="createButton">Post</button>
+
+        <div id="statusDiv" style="color:red;"</div>
 
       </div>
 

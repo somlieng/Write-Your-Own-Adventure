@@ -418,7 +418,7 @@ app.post('/addStory/*', function (req, res) {
   var chapter = story.chapter;
 
   if (parent == "") {
-    db.all("SELECT * from users WHERE title=?",[title], function(err,rows) {
+    db.all("SELECT * from stories WHERE title=?",[title], function(err,rows) {
       if (rows == undefined || rows.length == 0) {
         var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
         stmt.run(email, parent, content, title, chapter);
@@ -430,9 +430,10 @@ app.post('/addStory/*', function (req, res) {
       else {
         res.send('TITLE_EXISTS');
       }
+    });
   }
   else {
-    db.all("SELECT * from users WHERE title=? AND chapter=?", [title, chapter], function(err,rows) {
+    db.all("SELECT * from stories WHERE title=? AND chapter=?", [title, chapter], function(err,rows) {
       if (rows == undefined || rows.length == 0) {
         var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
         stmt.run(email, parent, content, title, chapter);
@@ -443,17 +444,10 @@ app.post('/addStory/*', function (req, res) {
       else {
         res.send('CHAPTER_EXISTS');
       }
-    })
+    });
 
   }
 
-  var stmt = db.prepare("INSERT into stories VALUES(?,?,?,?,?)");
-  stmt.run(email, parent, content, title, chapter);
-  stmt.finalize();
-
-  console.log("Added: " + email + " " + parent + " " + content + " " + title + " " + chapter);
-
-  res.send('OK');
 });
 
 

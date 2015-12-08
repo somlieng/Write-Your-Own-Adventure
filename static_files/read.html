@@ -152,10 +152,15 @@
                            chapter: document.getElementById('inputTitle').value
                          },
                   success: function( data ) {
-                    localStorage.setItem('chapter', document.getElementById('inputTitle').value);
-                    localStorage.setItem('author', localStorage.getItem("email"));
-  
-                    window.location.href = "read";
+                    if (data == 'OK') {
+                      localStorage.setItem('chapter', document.getElementById('inputTitle').value);
+                      localStorage.setItem('author', localStorage.getItem("email"));
+    
+                      window.location.href = "read";
+                    }
+                    else {
+                       $('#statusDiv').html("Story Already Has Chapter With This Name");
+                    }
                   },
               });
             });
@@ -228,6 +233,8 @@
         <br>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit" id="branchButton">Add New Chapter</button>
+
+        <div id="statusDiv" style="color:red;"></div>
 
       </div>
 
